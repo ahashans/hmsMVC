@@ -6,14 +6,24 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            @Html.ActionLink("HMS", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("XYZ Hospital", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
         </div>
         <div class="navbar-collapse collapse">
-@*            <ul class="nav navbar-nav">*@
-@*                <li>@Html.ActionLink("Home", "Index", "Home")</li>*@
-@*                <li>@Html.ActionLink("About", "About", "Home")</li>*@
-@*                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
-@*            </ul>*@
+            <ul class="nav navbar-nav">
+                @{
+                    if (User.IsInRole("Admin"))
+                    {
+                        @RenderPage("_AdminNav.cshtml")
+                    }
+                    if (User.IsInRole("Patient"))
+                    {
+                        @RenderPage("_PatientNav.cshtml")
+                    }
+                }
+                
+
+            </ul>
+            
             @Html.Partial("_LoginPartial")
         </div>
     </div>

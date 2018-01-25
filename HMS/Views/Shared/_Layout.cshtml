@@ -13,11 +13,13 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer class="bottom">
-            <p>&copy; @DateTime.Now.Year - @@hashansWebFactory</p>
-        </footer>
+        
     </div>
-
+<footer class="" id="Footer">
+    <div class="container">
+        <p>&copy; @DateTime.Now.Year - @@hashansWebFactory</p>
+    </div>
+</footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

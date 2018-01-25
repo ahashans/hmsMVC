@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+/*    background: linear-gradient(cadetblue, darkcyan);*/
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -21,4 +22,15 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+#Footer {
+    position: absolute;
+    bottom: 0px;
+    height: 50px;
+    width: 100%;
+    padding-top: 1%;
+/*    padding: 20px 20px 30px 20px;*/
+/*    background-color: #123;*/
+    background: linear-gradient(aqua, aquamarine);
+/*    color: #321;*/
 }
