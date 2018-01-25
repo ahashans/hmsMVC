@@ -199,6 +199,10 @@
     <Compile Include="Migrations\201801250426074_InitialMigration.Designer.cs">
       <DependentUpon>201801250426074_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801250532281_AddedUserBasicInformationPropertiesInUserClass.cs" />
+    <Compile Include="Migrations\201801250532281_AddedUserBasicInformationPropertiesInUserClass.Designer.cs">
+      <DependentUpon>201801250532281_AddedUserBasicInformationPropertiesInUserClass.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -286,6 +290,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201801250426074_InitialMigration.resx">
       <DependentUpon>201801250426074_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801250532281_AddedUserBasicInformationPropertiesInUserClass.resx">
+      <DependentUpon>201801250532281_AddedUserBasicInformationPropertiesInUserClass.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using HMS.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace HMS.Controllers
 {
@@ -151,10 +152,23 @@ namespace HMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser {FullName = model.FullName,Gender = model.Gender,DateOfBirth = model.DateOfBirth,Address = model.Address,Mobile = model.Mobile, UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                //Adding Role
+                    string[] roleNames = { "Admin", "Doctor", "Patient", "Receptionist" };
+                    var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                    var roleManager = new RoleManager<IdentityRole>(roleStore);
+                    foreach (var roleName in roleNames)
+                    {                        
+                        var roleExist = await roleManager.RoleExistsAsync(roleName);
+                        if (!roleExist)
+                        {
+                            await roleManager.CreateAsync(new IdentityRole(roleName));
+                        }
+                    }
+                    await UserManager.AddToRoleAsync(user.Id, "Admin");
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

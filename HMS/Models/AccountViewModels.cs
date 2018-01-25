@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace HMS.Models
@@ -64,6 +65,23 @@ namespace HMS.Models
 
     public class RegisterViewModel
     {
+        [Required(ErrorMessage = "Full Name is Required!")]
+        [Display(Name = "Full Name")]
+        [StringLength(50)]
+        public string FullName { get; set; }
+        [Required(ErrorMessage = "Gender is Required!")]
+        [StringLength(6)]
+        public string Gender { get; set; }
+        [Required(ErrorMessage = "Date Of Birth is Required!")]
+        [Display(Name = "Date Of Birth")]
+        public DateTime? DateOfBirth { get; set; }
+        [Required(ErrorMessage = "Address is Required!")]
+        [StringLength(450)]
+        public string Address { get; set; }
+        [Required(ErrorMessage = "Mobile Number is Required!")]
+        [Display(Name = "Mobile Number")]
+        [StringLength(11)]
+        public string Mobile { get; set; }
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
