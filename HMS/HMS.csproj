@@ -194,6 +194,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
+    <Compile Include="Controllers\ReceptionistController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -209,8 +210,13 @@
     <Compile Include="Migrations\201801250543230_SeedRolesAndAdminUser.Designer.cs">
       <DependentUpon>201801250543230_SeedRolesAndAdminUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801251546525_CreatedDepartmentModel.cs" />
+    <Compile Include="Migrations\201801251546525_CreatedDepartmentModel.Designer.cs">
+      <DependentUpon>201801251546525_CreatedDepartmentModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Department.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -282,6 +288,8 @@
     <Content Include="Views\Shared\_AdminNav.cshtml" />
     <Content Include="Views\Shared\_PatientNav.cshtml" />
     <Content Include="Views\Patient\Index.cshtml" />
+    <Content Include="Views\Shared\_ReceptionistNav.cshtml" />
+    <Content Include="Views\Receptionist\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -308,6 +316,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801250543230_SeedRolesAndAdminUser.resx">
       <DependentUpon>201801250543230_SeedRolesAndAdminUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801251546525_CreatedDepartmentModel.resx">
+      <DependentUpon>201801251546525_CreatedDepartmentModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
