@@ -31,6 +31,33 @@ textarea {
     padding-top: 1%;
 /*    padding: 20px 20px 30px 20px;*/
 /*    background-color: #123;*/
-    background: linear-gradient(aqua, aquamarine);
+    
 /*    color: #321;*/
+}
+footer {
+/*    background: linear-gradient(crimson, aquamarine);*/
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d9edf2+40,add9e4+100 */
+    background: rgb(217,237,242); /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(217,237,242,1) 40%, rgba(173,217,228,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(217,237,242,1) 40%,rgba(173,217,228,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(217,237,242,1) 40%,rgba(173,217,228,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d9edf2', endColorstr='#add9e4',GradientType=0 ); /* IE6-9 */
+    padding-top: 1%;
+}
+hr {
+    border: none;
+    height: 3px;
+    /* Set the hr color */
+    color: #333; /* old IE */
+    background-color: #333; /* Modern Browsers */
+}
+html, body {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+.content {
+    flex: 1 0 auto;
 }
