@@ -157,18 +157,18 @@ namespace HMS.Controllers
                 if (result.Succeeded)
                 {
                 //Adding Role
-                    string[] roleNames = { "Admin", "Doctor", "Patient", "Receptionist" };
-                    var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
-                    var roleManager = new RoleManager<IdentityRole>(roleStore);
-                    foreach (var roleName in roleNames)
-                    {                        
-                        var roleExist = await roleManager.RoleExistsAsync(roleName);
-                        if (!roleExist)
-                        {
-                            await roleManager.CreateAsync(new IdentityRole(roleName));
-                        }
-                    }
-                    await UserManager.AddToRoleAsync(user.Id, "Admin");
+//                    string[] roleNames = { "Admin", "Doctor", "Patient", "Receptionist" };
+//                    var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+//                    var roleManager = new RoleManager<IdentityRole>(roleStore);
+//                    foreach (var roleName in roleNames)
+//                    {                        
+//                        var roleExist = await roleManager.RoleExistsAsync(roleName);
+//                        if (!roleExist)
+//                        {
+//                            await roleManager.CreateAsync(new IdentityRole(roleName));
+//                        }
+//                    }
+                    await UserManager.AddToRoleAsync(user.Id, "Patient");
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

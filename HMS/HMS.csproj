@@ -203,6 +203,10 @@
     <Compile Include="Migrations\201801250532281_AddedUserBasicInformationPropertiesInUserClass.Designer.cs">
       <DependentUpon>201801250532281_AddedUserBasicInformationPropertiesInUserClass.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801250543230_SeedRolesAndAdminUser.cs" />
+    <Compile Include="Migrations\201801250543230_SeedRolesAndAdminUser.Designer.cs">
+      <DependentUpon>201801250543230_SeedRolesAndAdminUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -293,6 +297,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801250532281_AddedUserBasicInformationPropertiesInUserClass.resx">
       <DependentUpon>201801250532281_AddedUserBasicInformationPropertiesInUserClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801250543230_SeedRolesAndAdminUser.resx">
+      <DependentUpon>201801250543230_SeedRolesAndAdminUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
