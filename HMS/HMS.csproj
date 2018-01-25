@@ -214,14 +214,21 @@
     <Compile Include="Migrations\201801251546525_CreatedDepartmentModel.Designer.cs">
       <DependentUpon>201801251546525_CreatedDepartmentModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801251640282_AddedSizeToDepartmentName.cs" />
+    <Compile Include="Migrations\201801251640282_AddedSizeToDepartmentName.Designer.cs">
+      <DependentUpon>201801251640282_AddedSizeToDepartmentName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\AdminIndexViewModel.cs" />
     <Compile Include="ViewModel\CreateUserViewModel.cs" />
+    <Compile Include="ViewModel\UserListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-flatly.css" />
@@ -290,6 +297,8 @@
     <Content Include="Views\Patient\Index.cshtml" />
     <Content Include="Views\Shared\_ReceptionistNav.cshtml" />
     <Content Include="Views\Receptionist\Index.cshtml" />
+    <Content Include="Views\Admin\CreateDepartment.cshtml" />
+    <Content Include="Views\Admin\AllDepartments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -319,6 +328,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801251546525_CreatedDepartmentModel.resx">
       <DependentUpon>201801251546525_CreatedDepartmentModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801251640282_AddedSizeToDepartmentName.resx">
+      <DependentUpon>201801251640282_AddedSizeToDepartmentName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using HMS.Models;
@@ -13,9 +14,15 @@ namespace HMS.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        public ApplicationDbContext _context { get; set; }
         public AdminController()
         {
+            _context = new ApplicationDbContext();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
         }
 
         public AdminController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -44,7 +51,21 @@ namespace HMS.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            return View();
+            var usersWithRoles = (from user in _context.Users
+                from userRole in user.Roles
+                join role in _context.Roles on userRole.RoleId equals
+                    role.Id
+                select new UserListViewModel()
+                {
+                    UserName = user.FullName,
+                    Email = user.Email,
+                    Role = role.Name
+                }).ToList();
+            var viewModel = new AdminIndexViewModel
+            {
+                UserList = usersWithRoles
+            };
+            return View(viewModel);
         }
         public ActionResult CreateUser()
         {
@@ -85,6 +106,30 @@ namespace HMS.Controllers
             {
                 ModelState.AddModelError("", error);
             }
+        }
+        public ActionResult CreateDepartment()
+        {
+            var department = new Department();
+            return View(department);
+        }
+        public ActionResult AllDepartments()
+        {
+            var departments = _context.Departments.ToList();
+
+            return View(departments);
+        }
+        public ActionResult StoreDepartment(Department department)
+        {
+            if (!ModelState.IsValid)//invalid
+            {
+                return View("CreateDepartment",department);
+            }
+            _context.Departments.Add(department);
+            _context.SaveChanges();
+
+            var departments = _context.Departments.ToList();
+            
+            return View("AllDepartments",departments);
         }
     }
 }
