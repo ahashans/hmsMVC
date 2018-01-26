@@ -19,6 +19,10 @@
                     {
                         @RenderPage("_PatientNav.cshtml")
                     }
+                    if (User.IsInRole("Receptionist"))
+                    {
+                        @RenderPage("_ReceptionistNav.cshtml")
+                    }
                 }
                 
 

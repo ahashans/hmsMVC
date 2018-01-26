@@ -7,13 +7,13 @@ namespace HMS.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddedSizeToDepartmentName : IMigrationMetadata
+    public sealed partial class AddedCardNumberToTicketModel : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedSizeToDepartmentName));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedCardNumberToTicketModel));
         
         string IMigrationMetadata.Id
         {
-            get { return "201801251640282_AddedSizeToDepartmentName"; }
+            get { return "201801261417193_AddedCardNumberToTicketModel"; }
         }
         
         string IMigrationMetadata.Source

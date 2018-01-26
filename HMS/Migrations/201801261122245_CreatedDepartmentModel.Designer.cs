@@ -13,7 +13,7 @@ namespace HMS.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201801251546525_CreatedDepartmentModel"; }
+            get { return "201801261122245_CreatedDepartmentModel"; }
         }
         
         string IMigrationMetadata.Source

@@ -210,13 +210,21 @@
     <Compile Include="Migrations\201801250543230_SeedRolesAndAdminUser.Designer.cs">
       <DependentUpon>201801250543230_SeedRolesAndAdminUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201801251546525_CreatedDepartmentModel.cs" />
-    <Compile Include="Migrations\201801251546525_CreatedDepartmentModel.Designer.cs">
-      <DependentUpon>201801251546525_CreatedDepartmentModel.cs</DependentUpon>
+    <Compile Include="Migrations\201801261122245_CreatedDepartmentModel.cs" />
+    <Compile Include="Migrations\201801261122245_CreatedDepartmentModel.Designer.cs">
+      <DependentUpon>201801261122245_CreatedDepartmentModel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201801251640282_AddedSizeToDepartmentName.cs" />
-    <Compile Include="Migrations\201801251640282_AddedSizeToDepartmentName.Designer.cs">
-      <DependentUpon>201801251640282_AddedSizeToDepartmentName.cs</DependentUpon>
+    <Compile Include="Migrations\201801261239541_AddedTicketModel.cs" />
+    <Compile Include="Migrations\201801261239541_AddedTicketModel.Designer.cs">
+      <DependentUpon>201801261239541_AddedTicketModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801261417193_AddedCardNumberToTicketModel.cs" />
+    <Compile Include="Migrations\201801261417193_AddedCardNumberToTicketModel.Designer.cs">
+      <DependentUpon>201801261417193_AddedCardNumberToTicketModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801261530181_ModifiedPaymentTimeStampToCurrentDateOfTicketModel.cs" />
+    <Compile Include="Migrations\201801261530181_ModifiedPaymentTimeStampToCurrentDateOfTicketModel.Designer.cs">
+      <DependentUpon>201801261530181_ModifiedPaymentTimeStampToCurrentDateOfTicketModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -224,10 +232,13 @@
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Ticket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\AdminIndexViewModel.cs" />
     <Compile Include="ViewModel\CreateUserViewModel.cs" />
+    <Compile Include="ViewModel\TicketFormViewModel.cs" />
+    <Compile Include="ViewModel\TicketUserViewModel.cs" />
     <Compile Include="ViewModel\UserListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -299,6 +310,8 @@
     <Content Include="Views\Receptionist\Index.cshtml" />
     <Content Include="Views\Admin\CreateDepartment.cshtml" />
     <Content Include="Views\Admin\AllDepartments.cshtml" />
+    <Content Include="Views\Receptionist\CreateTicket.cshtml" />
+    <Content Include="Views\Receptionist\DisplayTicket.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -326,11 +339,17 @@
     <EmbeddedResource Include="Migrations\201801250543230_SeedRolesAndAdminUser.resx">
       <DependentUpon>201801250543230_SeedRolesAndAdminUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801251546525_CreatedDepartmentModel.resx">
-      <DependentUpon>201801251546525_CreatedDepartmentModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801261122245_CreatedDepartmentModel.resx">
+      <DependentUpon>201801261122245_CreatedDepartmentModel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801251640282_AddedSizeToDepartmentName.resx">
-      <DependentUpon>201801251640282_AddedSizeToDepartmentName.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801261239541_AddedTicketModel.resx">
+      <DependentUpon>201801261239541_AddedTicketModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801261417193_AddedCardNumberToTicketModel.resx">
+      <DependentUpon>201801261417193_AddedCardNumberToTicketModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801261530181_ModifiedPaymentTimeStampToCurrentDateOfTicketModel.resx">
+      <DependentUpon>201801261530181_ModifiedPaymentTimeStampToCurrentDateOfTicketModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

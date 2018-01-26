@@ -11,8 +11,8 @@ namespace HMS.Migrations
                 "dbo.Departments",
                 c => new
                     {
-                        DepartmentId = c.Guid(nullable: false),
-                        Name = c.String(),
+                        DepartmentId = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false, maxLength: 30),
                         Fee = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.DepartmentId);
