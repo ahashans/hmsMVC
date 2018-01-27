@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using HMS.Models;
 using HMS.ViewModel;
 using Microsoft.AspNet.Identity;
@@ -48,7 +50,20 @@ namespace HMS.Controllers
         }
         public ActionResult DisplayTicket()
         {
-            return View();
+            var roleId = _context.Roles.Where(m => m.Name == "Patient").Select(m => m.Id).SingleOrDefault();
+            var users = _context.Users
+                .Where(u => u.Roles.Any(r => r.RoleId == roleId)).ToList();
+            var viewModel = new TicketUserViewModel
+            {
+                Patients = users
+            };
+            return View(viewModel);
+        }
+        public JsonResult GetTickets(string patientId)
+        {
+            var tickets = _context.Tickets.Where(t => t.PatientUserId == patientId).Include(t => t.Department)
+                .Include(t => t.PatientUser).Include(t => t.ReceptionistUser).ToArray();
+            return Json(tickets,JsonRequestBehavior.AllowGet);
         }
         public ActionResult StoreTicket(TicketFormViewModel viewModel)   
         {
@@ -56,7 +71,6 @@ namespace HMS.Controllers
             {
                 return View("Index");
             }
-            //viewModel.Ticket.PaymentTimeStamp=DateTime.Now;
             viewModel.Ticket.ReceptionistUserId = User.Identity.GetUserId();
             viewModel.Ticket.TicketStatus = "Open";
             _context.Tickets.Add(viewModel.Ticket);
