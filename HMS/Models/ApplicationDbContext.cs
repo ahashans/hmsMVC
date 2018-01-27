@@ -7,8 +7,8 @@ namespace HMS.Models
     {
         public DbSet<Department> Departments { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
-
-
+        public DbSet<DoctorDepartment> DoctorDepartments { get; set; }
+        public DbSet<Diagnosis> Diagnoses { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

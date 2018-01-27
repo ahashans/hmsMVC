@@ -13,8 +13,6 @@
                 cache: false,
                 type: "POST",
                 success: function(data) {
-//                console.log(data.fees);
-//                console.log("data size: "+ data.fees.length);
                     if (data.fees) {
                         $("#txtBillAmount").attr("value", data.fees);
                     } else {
@@ -44,6 +42,11 @@
     }
 </script>
 <h2>Create Ticket</h2>
+@if (ViewBag.openTicketExists != null)
+{
+    <h2 class="alert-warning">Patient already has a open ticket in this department.</h2>
+    <br/>  
+}
 @using (Html.BeginForm("StoreTicket", "Receptionist", FormMethod.Post))
 {
     <div class="container">
@@ -102,7 +105,6 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
         $(document).ready(function() {
-            //alert();
             $("#txtBillAmount").attr("readonly","true");
             $("#card").slideUp("fast");
         });

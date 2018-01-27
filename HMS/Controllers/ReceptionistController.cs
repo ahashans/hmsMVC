@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Script.Serialization;
 using HMS.Models;
 using HMS.ViewModel;
 using Microsoft.AspNet.Identity;
@@ -50,6 +46,7 @@ namespace HMS.Controllers
         }
         public ActionResult DisplayTicket()
         {
+
             var roleId = _context.Roles.Where(m => m.Name == "Patient").Select(m => m.Id).SingleOrDefault();
             var users = _context.Users
                 .Where(u => u.Roles.Any(r => r.RoleId == roleId)).ToList();
@@ -65,17 +62,43 @@ namespace HMS.Controllers
                 .Include(t => t.PatientUser).Include(t => t.ReceptionistUser).ToArray();
             return Json(tickets,JsonRequestBehavior.AllowGet);
         }
-        public ActionResult StoreTicket(TicketFormViewModel viewModel)   
+        public ActionResult StoreTicket(TicketFormViewModel viewModel)
         {
-            if (!ModelState.IsValid)
+            var roleId = _context.Roles.Where(m => m.Name == "Patient").Select(m => m.Id).SingleOrDefault();
+            var users = _context.Users
+                .Where(u => u.Roles.Any(r => r.RoleId == roleId)).ToList();
+            var openTicketExists =
+                from t in _context.Tickets
+                where t.PatientUserId == viewModel.Ticket.PatientUserId
+                where t.TicketStatus=="Open"
+                where t.DepartmentId==viewModel.Ticket.DepartmentId//Remove this part to Filter by only open tickets
+                select t;
+            if (!ModelState.IsValid || openTicketExists.Any())
             {
-                return View("Index");
+                if (openTicketExists.Any())
+                {
+                    ViewBag.openTicketExists = "True";
+                }
+                var view = new TicketFormViewModel
+                {
+                    Ticket = new Ticket(),
+                    Departments = _context.Departments.ToList(),
+                    Patients = users
+                };
+                
+                return View("CreateTicket",view);
             }
             viewModel.Ticket.ReceptionistUserId = User.Identity.GetUserId();
             viewModel.Ticket.TicketStatus = "Open";
             _context.Tickets.Add(viewModel.Ticket);
             _context.SaveChanges();
-            return View("DisplayTicket");
+            
+            var ticketDisplayViewModel = new TicketUserViewModel
+            {
+                Patients = users
+            };
+            return View("DisplayTicket", ticketDisplayViewModel);
+
         }
 
     }

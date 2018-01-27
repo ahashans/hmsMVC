@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using HMS.Models;
 
 namespace HMS.ViewModel
 {
@@ -40,5 +42,8 @@ namespace HMS.ViewModel
 
         [Required(ErrorMessage = "Role is Required!")]
         public string Role { get; set; }
+        [Display(Name = "Department")]
+        public int DepartmentId { get; set; }
+        public IEnumerable<Department> Departments { get; set; }
     }
 }

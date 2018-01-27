@@ -1,0 +1,106 @@
+﻿@model HMS.ViewModel.CreateDiagnosisViewModel
+@{
+    ViewBag.Title = "CreateDiagnosis";
+}
+<script type="text/javascript">
+    //$("#ticketId").removeAttr("data-val");
+    function getPatientInfo(patientId)
+    {
+        if (patientId) {
+            var url = "/Doctor/GetPatientInfo/";
+            $.ajax({
+                url: url,
+                data: { patientid: patientId },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                    if (data[0].dob) {
+                        var dob = moment(data[0].dob).format("YYYY-MM-DD");
+                        var age = moment().diff(dob, 'years');
+                        $("#age").attr("value", age);
+                        $("#gender").attr("value", data[0].gender);
+                        $("#ticketId").attr("value", data[0].ticketId);
+                    } else {
+                        $("#age").attr("value", "");
+                        $("#gender").attr("value", "");
+                        $("#ticketId").attr("value", "");
+                    }
+
+                },
+                error: function(reponse) {
+                    //alert("error : " + reponse);
+                    $("#ddlPatient").html("");
+                    $("#ddlPatient").html("<option>No Patient Found</option>");
+                }
+            });
+        } else {
+            $("#age").attr("value", "");
+            $("#gender").attr("value", "");
+            $("#ticketId").attr("value", "");
+        }
+    }
+</script>
+<h2>Create Diagnosis</h2>
+<br />
+<div class="form-horizontal">
+    <h3 class="alert alert-info">If The Drop Down List does not conatin any Patient that means there is no patient matched with your department who has an unused or open Ticket</h3>
+    <br />
+    <div class="form-group">
+        <label class="control-label">Patient Name</label>
+        @Html.DropDownList("ddlPatients", new SelectList(Model.Patients, "Id", "FullName"), "Select a Patient", new {id = "ddlpatient", @class = "form-control", onchange = "javascript:getPatientInfo(this.value);"})
+    </div>
+    <div id="info">
+        <div class="form-group">
+            <label class="control-label">Age</label>
+            <input type="number" readonly="readonly" id="age" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Gender</label>
+            <input type="text" readonly="readonly" id="gender" class="form-control"/>
+        </div>
+        <hr/>
+        @using (Html.BeginForm("StoreDiagnosis", "Doctor", FormMethod.Post))
+        {
+            <div class="form-group">
+                @Html.LabelFor(m => m.Diagnosis.Ticket, new {@class = "control-label"})
+                @Html.TextBoxFor(m => m.Diagnosis.TicketId, new {id = "ticketId", @class = "form-control"})
+                @Html.ValidationMessageFor(m => m.Diagnosis.TicketId)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Diagnosis.DiagnosisProvided, new {@class = "control-label"})
+                @Html.TextAreaFor(m => m.Diagnosis.DiagnosisProvided, new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.Diagnosis.DiagnosisProvided)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Diagnosis.TreatmentProvided, new {@class = "control-label"})
+                @Html.TextAreaFor(m => m.Diagnosis.TreatmentProvided, new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.Diagnosis.TreatmentProvided)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Diagnosis.RequiredTests, new {@class = "control-label"})
+                @Html.TextAreaFor(m => m.Diagnosis.RequiredTests, new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.Diagnosis.RequiredTests)
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Submit</button>
+                <button type="reset" class="btn btn-warning">Reset</button>
+            </div>
+
+        }
+    </div>
+</div>
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#ticketId").attr("readonly", "true");
+
+//            $("#ticketId").removeAttr("data-val-number");
+//            $("#ticketId").removeAttr("data-val-required");
+            $("#ticketId").attr("value", "Please Select A Patient First");
+//            $("#ticketId").attr("data-val-required", "Please Select a Patient");
+        });
+    </script>
+}

@@ -69,7 +69,11 @@ namespace HMS.Controllers
         }
         public ActionResult CreateUser()
         {
-            return View();
+            var viewModel= new CreateUserViewModel
+            {
+                Departments = _context.Departments.ToList()
+            };
+            return View(viewModel);
         }
         [HttpPost]
         [AllowAnonymous]
@@ -84,6 +88,17 @@ namespace HMS.Controllers
                 {
                     
                     await UserManager.AddToRoleAsync(user.Id, model.Role);
+                    if (model.Role=="Doctor")
+                    {
+                        var doctorDepartment = new DoctorDepartment
+                        {
+                            DepartmentId = model.DepartmentId,
+                            DoctorUserId = user.Id
+                           
+                        };
+                        _context.DoctorDepartments.Add(doctorDepartment);
+                        _context.SaveChanges();
+                    }
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

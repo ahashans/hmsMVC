@@ -4,8 +4,17 @@
 }
 
 <script type="text/javascript">
+    $("#departmentView").slideUp("fast");
+    $("#ddlDepartment").removeAttr("data-val");
     function getRole(value) {
-        //console.log("Role: " + value);
+        console.log("Role: " + value);
+        if (value == "Doctor") {
+            $("#departmentView").slideDown("slow");
+            $("#ddlDepartment").attr("required", "true");
+        } else {
+            $("#departmentView").slideUp("fast");
+            $("#ddlDepartment").removeAttr("required");
+        }
     }
 </script>
 <h2>CreateUser</h2>
@@ -81,6 +90,13 @@
             @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger"})
         </div>
     </div>
+    <div id="departmentView" class="form-group">
+        @Html.LabelFor(model => model.DepartmentId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.DepartmentId, new SelectList(Model.Departments, "DepartmentId", "Name"), "Select a Department", new {id="ddlDepartment", @class = "form-control", onchange = "javascript:;" })
+            @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
+        </div>
+    </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" class="btn btn-default" value="Register" />
@@ -92,7 +108,7 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
         $(document).ready(function() {
-
+            $("#departmentView").slideUp("fast");
         });
     </script>
 }
