@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 
 namespace HMS.Controllers
 {
+    [Authorize(Roles = "Receptionist")]
     public class ReceptionistController : Controller
     {
         private ApplicationDbContext _context;

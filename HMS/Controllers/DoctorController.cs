@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 
 namespace HMS.Controllers
 {
+    [Authorize(Roles = "Doctor")]
     public class DoctorController : Controller
     {
         private ApplicationDbContext _context;

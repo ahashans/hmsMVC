@@ -1,0 +1,70 @@
+﻿@model string
+@{
+    ViewBag.Title = "ViewAllDiagnosis";
+}
+
+<h2>View All Diagnosis</h2>
+<br />
+<table id="diagnosisTable" class="table dataTable table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>Ticket Id</th>
+        <th>Department</th>
+        <th>Diagnosed By</th>
+        <th>Diagnosis Provided</th>
+        <th>Treatment Provided</th>
+        <th>Required Test</th>
+        <th>Diagnosis Date</th>
+    </tr>
+    </thead>
+    <tbody>
+            
+    </tbody>
+</table>
+<input id="patientId" type="text" value="@ViewBag.patientId" hidden/>
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        function getDiagnosis(patientId) {
+            var table = $("#diagnosisTable").DataTable({
+                serverSide:false,
+                processing:true,
+                destroy:true,
+                ajax: {
+                    type: "POST",
+                    url: "/Patient/GetDiagnosis",
+                    data: { patientid: patientId},
+                    dataSrc:""
+                },
+                columns: [
+                    {
+                        data: "ticketId"
+                    }, {
+                        data: "departmentName"
+                    }, {
+                        data: "diagnosedBy"
+                    }, {
+                        data: "diagnosisProvided"
+
+                    }, {
+                        data:"treatmentProvided"
+                    }, {
+                        data: "requiredTest"
+                    }, {
+                        data: "diagnosisDate",
+                        render: function(data) {
+                            return moment(data).format("DD-MMM-YYYY");
+                        }
+                    }
+                ]
+                                                
+            });
+            table.draw();
+            }
+
+            getDiagnosis($("#patientId").val());
+        });
+    </script>
+}

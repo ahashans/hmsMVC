@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "ViewAllTickets";
+}
+
+<h2>View All Tickets</h2>
+<br />
+<div id="ticketInfo">
+    <table id="ticketTable" class="table table-bordered table-hover table-responsive table-striped table-condensed dataTable">
+        <thead>
+        <tr>
+            <th>Department</th>
+            <th>Bill Amount</th>
+            <th>Payment Method</th>
+            <th>Card Number</th>
+            <th>Payment Date</th>
+            <th>Ticket Status</th>
+            <th>Ticket Created By</th>
+        </tr>
+        </thead>
+        <tbody>
+                
+        </tbody>
+    </table>
+</div>
+<input id="patientId" type="text" value="@ViewBag.patientId" hidden />
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function() {
+            function getTickets(patientId) {
+                var table  = $("#ticketTable").DataTable({
+                    serverSide: false,
+                    processing: true,
+                    destroy: true,
+                    ajax: {
+                        type: "POST",
+                        url: "/Patient/GetTickets",
+                        data: { patientid: patientId },
+                        dataSrc: ""
+                    },
+                    columns: [
+                        {
+                            data: "Department",
+                            render: function (data) {
+                                return data.Name;
+                            }
+                        }, {
+                            data: "BillAmount"
+
+                        }, {
+                            data: "PaymentMethod"
+                        }, {
+                            data: "CardNumber"
+                        }, {
+                            data: "PaymentTimeStamp",
+                            render: function (data) {
+                                return moment(data).format("DD-MMM-YYYY");
+                            }
+                        }, {
+                            data: "TicketStatus"
+                        }, {
+                            data: "ReceptionistUser",
+                            render: function (data, type, ticket) {
+                                return data.FullName;
+                            }
+                        }
+                    ]
+                });
+                table.draw();
+            }
+
+            getTickets($("#patientId").val());
+        });
+    </script>
+}

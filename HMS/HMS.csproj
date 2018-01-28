@@ -618,6 +618,8 @@
     <Content Include="Views\Doctor\CreateDiagnosis.cshtml" />
     <Content Include="Views\Shared\_DoctorNav.cshtml" />
     <Content Include="Views\Doctor\ViewDiagnosis.cshtml" />
+    <Content Include="Views\Patient\ViewAllDiagnosis.cshtml" />
+    <Content Include="Views\Patient\ViewAllTickets.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
