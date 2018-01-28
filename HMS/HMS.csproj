@@ -253,6 +253,7 @@
     <Compile Include="ViewModel\AdminIndexViewModel.cs" />
     <Compile Include="ViewModel\CreateDiagnosisViewModel.cs" />
     <Compile Include="ViewModel\CreateUserViewModel.cs" />
+    <Compile Include="ViewModel\DisplayDiagnosisViewModel.cs" />
     <Compile Include="ViewModel\TicketFormViewModel.cs" />
     <Compile Include="ViewModel\TicketUserViewModel.cs" />
     <Compile Include="ViewModel\UserListViewModel.cs" />
@@ -616,6 +617,7 @@
     <Content Include="Views\Doctor\Index.cshtml" />
     <Content Include="Views\Doctor\CreateDiagnosis.cshtml" />
     <Content Include="Views\Shared\_DoctorNav.cshtml" />
+    <Content Include="Views\Doctor\ViewDiagnosis.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

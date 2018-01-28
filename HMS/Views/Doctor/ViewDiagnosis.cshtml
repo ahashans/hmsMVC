@@ -1,0 +1,116 @@
+﻿@model HMS.ViewModel.DisplayDiagnosisVIewModel
+
+@{
+    ViewBag.Title = "ViewDiagnosis";
+}
+<script type="text/javascript">
+    function getPatientDiagnosis(patientId) {
+        var table = $("#diagnosisTable").DataTable({
+            serverSide:false,
+            processing:true,
+            destroy:true,
+            ajax: {
+                type: "POST",
+                url: "/Doctor/GetDiagnosis",
+                data: { patientid: patientId },
+                dataSrc:""
+            },
+            columns: [
+                {
+                    data: "ticketId"
+                }, {
+                    data: "departmentName"
+                }, {
+                    data: "diagnosedBy"
+                }, {
+                    data: "diagnosisProvided"
+
+                }, {
+                    data:"treatmentProvided"
+                }, {
+                    data: "requiredTest"
+                }, {
+                    data: "diagnosisDate",
+                    render: function(data) {
+                        return moment(data).format("DD-MMM-YYYY");
+                    }
+                }
+            ]
+        });
+        if (patientId) {
+            var url = "/Doctor/GetPatientInfo/";
+            $.ajax({
+                url: url,
+                data: { patientid: patientId },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                    if (data[0].dob) {
+                        var dob = moment(data[0].dob).format("YYYY-MM-DD");
+                        var age = moment().diff(dob, 'years');
+                        $("#age").attr("value", age);
+                        $("#gender").attr("value", data[0].gender);
+                    } else {
+                        $("#age").attr("value", "");
+                        $("#gender").attr("value", "");
+                    }
+
+                },
+                error: function (/*reponse*/) {
+                    //alert("error : " + reponse);
+                    $("#patientLabel").html("");
+                    $("#patientLabel").html("No Patient Found");
+                }
+            });
+            table.draw();
+        } else {
+            $("#age").attr("value", "");
+            $("#gender").attr("value", "");
+            table.clear();
+        }
+    }
+</script>
+<h2>View Diagnosis</h2>
+<div class="form-horizontal">
+    <div class="form-group">
+        <label class="control-label">Patient</label>
+        @Html.DropDownList("ddlPatients",new SelectList(Model.Patients, "Id","FullName"), "Select a Patient", new{id="ddlPatient", @class = "form-control", onchange="javascript:getPatientDiagnosis(this.value);"})
+        <label id="patientLabel" class="label label-warning"></label>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Age</label>
+        <input type="number" readonly="readonly" id="age" class="form-control"/>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Gender</label>
+        <input type="text" readonly="readonly" id="gender" class="form-control"/>
+    </div>
+    <hr />
+    <div id="diagnosisContainer">
+        <table id="diagnosisTable" class="table dataTable table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>Ticket Id</th>
+                <th>Department</th>
+                <th>Diagnosed By</th>
+                <th>Diagnosis Provided</th>
+                <th>Treatment Provided</th>
+                <th>Required Test</th>
+                <th>Diagnosis Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            
+            </tbody>
+        </table>
+    </div>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function() {
+            
+        });
+    </script>
+}

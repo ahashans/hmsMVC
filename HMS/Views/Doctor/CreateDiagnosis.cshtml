@@ -7,7 +7,7 @@
     function getPatientInfo(patientId)
     {
         if (patientId) {
-            var url = "/Doctor/GetPatientInfo/";
+            var url = "/Doctor/GetOpenTicketPatientInfo/";
             $.ajax({
                 url: url,
                 data: { patientid: patientId },
@@ -27,7 +27,7 @@
                     }
 
                 },
-                error: function(reponse) {
+                error: function(/*reponse*/) {
                     //alert("error : " + reponse);
                     $("#ddlPatient").html("");
                     $("#ddlPatient").html("<option>No Patient Found</option>");

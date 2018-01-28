@@ -35,14 +35,10 @@ textarea {
 /*    color: #321;*/
 }
 footer {
-/*    background: linear-gradient(crimson, aquamarine);*/
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d9edf2+40,add9e4+100 */
-    background: rgb(217,237,242); /* Old browsers */
-    background: -moz-linear-gradient(top, rgba(217,237,242,1) 40%, rgba(173,217,228,1) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, rgba(217,237,242,1) 40%,rgba(173,217,228,1) 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, rgba(217,237,242,1) 40%,rgba(173,217,228,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d9edf2', endColorstr='#add9e4',GradientType=0 ); /* IE6-9 */
-    padding-top: 1%;
+    background: #EC6F66;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #F3A183, #EC6F66);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #F3A183, #EC6F66); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    padding-top: 5px;
 }
 hr {
     border: none;
@@ -53,17 +49,17 @@ hr {
 }
 html, body {
     height: 100%;
-    color: #2667c8;
+    
 }
 
 body {
     display: flex;
     flex-direction: column;
-    background: #34e89e;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #0f3443, #34e89e);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #0f3443, #34e89e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #FC354C;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #0ABFBC, #FC354C);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #0ABFBC, #FC354C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-
+    color: #333;
 }
 .content {
     flex: 1 0 auto;
