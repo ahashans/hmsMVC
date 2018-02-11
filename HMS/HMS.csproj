@@ -19,7 +19,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44302</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -259,6 +259,10 @@
     <Compile Include="ViewModel\UserListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-HMS-20180125100142.mdf" />
+    <Content Include="App_Data\aspnet-HMS-20180125100142_log.ldf">
+      <DependentUpon>aspnet-HMS-20180125100142.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-flatly.css" />
     <Content Include="Content\bootstrap-flatly.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -473,6 +477,8 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-1.12.4-vsdoc.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
@@ -621,9 +627,7 @@
     <Content Include="Views\Patient\ViewAllDiagnosis.cshtml" />
     <Content Include="Views\Patient\ViewAllTickets.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>
@@ -686,7 +690,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50562</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50562/</IISUrl>
+          <IISUrl>https://localhost:44302/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
