@@ -18,7 +18,19 @@ namespace HMS
                         "~/Scripts/owl.carousel.js",
                         "~/Scripts/plugins.js"
                         ));
-
+            bundles.Add(new ScriptBundle("~/bundles/adminlib").Include(
+                "~/Scripts/jquery-{version}.js",
+                "~/Scripts/moment*",                
+                "~/Scripts/respond.js",
+                "~/Scripts/DataTables/jquery.datatables.js",
+                "~/Scripts/DataTables/datatables.bootstrap.js",
+                "~/Scripts/owl.carousel.js",
+                "~/Scripts/plugins.js",
+                "~/Content/SBAdminPanel/js/jquery.js",
+                "~/Content/SBAdminPanel/js/bootstrap.min.js",
+                "~/Content/SBAdminPanel/js/jquery.js"
+            ));
+            //            "~/Content/SBAdminPanel/js/jquery.js"
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
@@ -40,6 +52,19 @@ namespace HMS
                       "~/Content/responsive.css",
                       "~/Content/slider.css",
                       "~/Content/site.css"));
+            bundles.Add(new StyleBundle("~/Content/admincss").Include(
+                "~/Content/SBAdminPanel/css/bootstrap.min.css",
+                "~/Content/DataTables/css/datatables.bootstrap.css",
+                "~/Content/owl.carousel.css",
+                "~/Content/owl.theme.default.css",
+                "~/Content/animate.css",
+                "~/Content/font-awesome.min.css",
+                "~/Content/jquery-ui.css",
+                "~/Content/responsive.css",
+                "~/Content/slider.css",
+                "~/Content/SBAdminPanel/css/sb-admin.css",
+                "~/Content/font-awesome/css/font-awesome.min.css"
+            ));
         }
     }
 }

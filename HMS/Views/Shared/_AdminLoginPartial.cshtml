@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNet.Identity
+@* @if (Request.IsAuthenticated) *@
+@* { *@
+@*     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm"})) *@
+@*     { *@
+@*         @Html.AntiForgeryToken() *@
+@*         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> @User.Identity.GetUserName() <b class="caret"></b></a> *@
+@*         <ul class="dropdown-menu"> *@
+@*             <li> *@
+@*                 <a href="@Url.Action("Index","Manage")"><i class="fa fa-fw fa-user"></i> Profile</a> *@
+@*             </li> *@
+@*             <li class="divider"></li> *@
+@*             <li> *@
+@*                 <a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-fw fa-power-off"></i>Log Out</a> *@
+@*             </li> *@
+@*         </ul> *@
+@*     } *@
+@* } *@
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> @User.Identity.GetUserName() <b class="caret"></b></a>
+    <ul class="dropdown-menu">
+        <li>
+            <a href="@Url.Action("Index","Manage")"><i class="fa fa-fw fa-user"></i> Profile</a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a id="logoff" href="@Url.Action("LogOut","Account")"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+        </li>
+    </ul>
+</li>
+<script>
+    console.log("hello");
+    $(document).ready(function(){
+        console.log("hello");
+    });
+</script>

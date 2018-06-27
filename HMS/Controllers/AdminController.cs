@@ -66,7 +66,7 @@ namespace HMS.Controllers
             {
                 UserList = usersWithRoles
             };
-            return View(viewModel);
+            return View("Index","_AdminLayout",viewModel);
         }
         public ActionResult CreateUser()
         {
@@ -74,7 +74,7 @@ namespace HMS.Controllers
             {
                 Departments = _context.Departments.ToList()
             };
-            return View(viewModel);
+            return View("CreateUser", "_AdminLayout", viewModel);
         }
         [HttpPost]
         [AllowAnonymous]
@@ -132,26 +132,26 @@ namespace HMS.Controllers
         public ActionResult CreateDepartment()
         {
             var department = new Department();
-            return View(department);
+            return View("CreateDepartment", "_AdminLayout", department);
         }
         public ActionResult AllDepartments()
         {
             var departments = _context.Departments.ToList();
 
-            return View(departments);
+            return View("AllDepartments", "_AdminLayout", departments);
         }
         public ActionResult StoreDepartment(Department department)
         {
             if (!ModelState.IsValid)//invalid
             {
-                return View("CreateDepartment",department);
+                return View("CreateDepartment", "_AdminLayout", department);
             }
             _context.Departments.Add(department);
             _context.SaveChanges();
 
             var departments = _context.Departments.ToList();
             
-            return View("AllDepartments",departments);
+            return View("AllDepartments", "_AdminLayout", departments);
         }
     }
 }
