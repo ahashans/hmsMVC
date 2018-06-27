@@ -41,9 +41,9 @@
                         <input type="submit" value="Log in" class="btn btn-default" />
                     </div>
                 </div>
-                <p>
+                <label class="alert alert-link">
                     @Html.ActionLink("Register as a new user", "Register")
-                </p>
+                </label>
                 @* Enable this once you have account confirmation enabled for password reset functionality
                     <p>
                         @Html.ActionLink("Forgot your password?", "ForgotPassword")
@@ -55,6 +55,56 @@
         <section id="socialLoginForm">
             @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
         </section>
+        <h4>Some Existing User Account</h4>
+        <hr />
+        <table class="table table-responsive table-striped">
+            <tr>
+                <th>Role</th>
+                <th>username</th>
+                <th>password</th>
+            </tr>
+            <tr>
+                <td>Admin</td>
+                <td>ahashans@gmail.com</td>
+                <td>Ahashans@gmail.c0m</td>
+            </tr>
+            <tr>
+                <td>Doctor -> Accident & Emergency</td>
+                <td>doctor@hms.com</td>
+                <td>Doctor@hms.c0m</td>
+            </tr>
+            <tr>
+                <td>Doctor -> Cardiology</td>
+                <td>doctor2@hms.com</td>
+                <td>Doctor2@hms.c0m</td>
+            </tr>
+            <tr>
+                <td>Doctor -> Gynocology</td>
+                <td>doctor3@hms.com</td>
+                <td>Doctor3@hms.c0m</td>
+            </tr>
+            <tr>
+                <td>Receptionist</td>
+                <td>receptionist@hms.com</td>
+                <td>Receptionist@hms.c0m</td>
+            </tr>
+            <tr>
+                <td>Patient</td>
+                <td>patient@hms.com</td>
+                <td>Patient@hms.c0m</td>
+            </tr>
+            <tr>
+                <td>Patient 2</td>
+                <td>patient2@hms.com</td>
+                <td>Patient2@hms.c0m</td>
+            </tr>
+            <tr>
+                <td>Patient 3 Female</td>
+                <td>patient3@hms.com</td>
+                <td>Patient3@hms.c0m</td>
+            </tr>
+
+        </table>
     </div>
 </div>
 

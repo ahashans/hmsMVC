@@ -2,28 +2,101 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>XYZ Hospital</h1>
-    <p class="lead">Xyz Hospital is bla bla bla bla bla bla bla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla bla.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+<div class="slider-area">
+    <div class="slider-active owl-carousel">
+        <img src="~/Content/Images/hospital-ad-1.jpg">
+        <img src="~/Content/Images/hospital-ad-2.jpg">
+        <img src="~/Content/Images/hospital-ad-3.jpg">
+    </div>
+</div>
+
+<br />
+<br />
+<div class="row">
+    <div class="col-md-8">
+        <div class="jumbotron">
+            <h1>XYZ Hospital</h1>
+            <p class="lead">Xyz Hospital is loreum ipsum dollar set amet.loreum ipsum dollar set amet frus mit apen trump.</p>
+            <p><a href="Home/About" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+        </div>
+    </div>
+    <div class="col-md-2">
+        
+    </div>
+    <div class="col-md-2">
+        
+    </div>
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Our Doctors</h2>
-        <p>
-            We hire World Class doctors
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">See All Doctors &raquo;</a></p>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Latest News</h3>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="">Lorem Ipsum</a></li>
+                    <li class="list-group-item"><a href="">dollar set amet</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div class="col-md-4">
-        <h2>Our Facilities</h2>
-        <p>We don't compromize when it is the matter of facility.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Upcoming Events</h3>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="">Lorem Ipsum</a></li>
+                    <li class="list-group-item"><a href="">dollar set amet</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div class="col-md-4">
-        <h2>Patient Story</h2>
-        <p>Here are some lovely patient stories.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Notice Board</h3>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="">Lorem Ipsum</a></li>
+                    <li class="list-group-item"><a href="">dollar set amet</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
+@section scripts
+{
+    <script type="text/javascript">
+        
+        $(document).ready(function(){
+            $('.slider-active').owlCarousel({
+                loop:true,
+                navText:['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+                nav:true,
+                dots:true,
+                animateIn:'bounceInRight',
+                autoplay:true,
+                responsive:{
+                    0:{
+                        items:1
+                    },
+                    600:{
+                        items:1
+                    },
+                    1000:{
+                        items:1
+                    }
+                }
+            })
+        });
+
+
+
+    </script>
+   
+}

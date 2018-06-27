@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -80,7 +81,13 @@ namespace HMS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateUser(CreateUserViewModel model)
         {
-            if (ModelState.IsValid)
+            //            if (model.Role == "Receptionist")
+            //            {Recep@hms.c0m
+            //                ModelState["model.DepartmentId"].Errors.Clear();
+            //                ModelState.Clear();
+            //            }
+            IEnumerable<ModelError> allErrors = ModelState.Values.SelectMany(v => v.Errors);
+            if (ModelState.IsValid || allErrors.Count()==1)
             {
                 var user = new ApplicationUser { FullName = model.FullName, Gender = model.Gender, DateOfBirth = model.DateOfBirth, Address = model.Address, Mobile = model.Mobile, UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
@@ -97,9 +104,9 @@ namespace HMS.Controllers
                            
                         };
                         _context.DoctorDepartments.Add(doctorDepartment);
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                     }
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -107,7 +114,7 @@ namespace HMS.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Admin");
                 }
                 AddErrors(result);
             }

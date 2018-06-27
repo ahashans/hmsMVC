@@ -263,6 +263,8 @@
     <Content Include="App_Data\aspnet-HMS-20180125100142_log.ldf">
       <DependentUpon>aspnet-HMS-20180125100142.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\animate.css" />
+    <Content Include="Content\animate.min.css" />
     <Content Include="Content\bootstrap-flatly.css" />
     <Content Include="Content\bootstrap-flatly.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -424,6 +426,24 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\fontawesome-all.css" />
+    <Content Include="Content\fontawesome-all.min.css" />
+    <Content Include="Content\fontawesome.css" />
+    <Content Include="Content\Images\hospital-ad-1.jpg" />
+    <Content Include="Content\Images\hospital-ad-2.jpg" />
+    <Content Include="Content\Images\hospital-ad-3.jpg" />
+    <Content Include="Content\Images\logo.jpg" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\jquery-ui.min.css" />
+    <Content Include="Content\owl.carousel.css" />
+    <Content Include="Content\owl.carousel.min.css" />
+    <Content Include="Content\owl.theme.default.css" />
+    <Content Include="Content\owl.theme.default.min.css" />
+    <Content Include="Content\owl.theme.green.css" />
+    <Content Include="Content\owl.theme.green.min.css" />
+    <Content Include="Content\responsive.css" />
+    <Content Include="Content\slider.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -466,6 +486,7 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -477,8 +498,15 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
+    <None Include="Properties\PublishProfiles\HMSAhsan - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-1.12.4-vsdoc.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
@@ -557,23 +585,36 @@
     <Content Include="Scripts\DataTables\responsive.jqueryui.min.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
+    <Content Include="Scripts\fontawesome-all.js" />
+    <Content Include="Scripts\fontawesome-all.min.js" />
+    <Content Include="Scripts\fontawesome.js" />
+    <Content Include="Scripts\fontawesome.min.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
     <Content Include="Scripts\jquery-1.12.4.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.blueimp-gallery.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\owl.carousel.js" />
+    <Content Include="Scripts\owl.carousel.min.js" />
+    <Content Include="Scripts\plugins.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\vendor\jquery-3.2.1.min.js" />
+    <Content Include="Scripts\vendor\modernizr-3.5.0.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -626,6 +667,9 @@
     <Content Include="Views\Doctor\ViewDiagnosis.cshtml" />
     <Content Include="Views\Patient\ViewAllDiagnosis.cshtml" />
     <Content Include="Views\Patient\ViewAllTickets.cshtml" />
+    <Content Include="Views\Home\DoctorStory.cshtml" />
+    <Content Include="Views\Home\PatientStory.cshtml" />
+    <Content Include="Views\Home\FacilityStory.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

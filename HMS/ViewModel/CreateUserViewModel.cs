@@ -16,6 +16,7 @@ namespace HMS.ViewModel
         public string Gender { get; set; }
         [Required(ErrorMessage = "Date Of Birth is Required!")]
         [Display(Name = "Date Of Birth")]
+        [DataType(DataType.Date)]
         public DateTime? DateOfBirth { get; set; }
         [Required(ErrorMessage = "Address is Required!")]
         [StringLength(450)]

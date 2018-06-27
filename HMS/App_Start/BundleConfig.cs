@@ -14,7 +14,10 @@ namespace HMS
                         "~/Scripts/bootstrap.js",
                         "~/Scripts/respond.js",
                         "~/Scripts/DataTables/jquery.datatables.js",
-                        "~/Scripts/DataTables/datatables.bootstrap.js"));
+                        "~/Scripts/DataTables/datatables.bootstrap.js",
+                        "~/Scripts/owl.carousel.js",
+                        "~/Scripts/plugins.js"
+                        ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -29,6 +32,13 @@ namespace HMS
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-flatly.css",
                       "~/Content/DataTables/css/datatables.bootstrap.css",
+                      "~/Content/owl.carousel.css",
+                      "~/Content/owl.theme.default.css",
+                      "~/Content/animate.css",
+                      "~/Content/font-awesome.min.css",
+                      "~/Content/jquery-ui.css",
+                      "~/Content/responsive.css",
+                      "~/Content/slider.css",
                       "~/Content/site.css"));
         }
     }

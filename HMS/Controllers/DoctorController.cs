@@ -61,17 +61,29 @@ namespace HMS.Controllers
         }
         public ActionResult CreateDiagnosis()
         {
-            var roleId = _context.Roles.Where(m => m.Name == "Patient").Select(m => m.Id).SingleOrDefault();
-            var users = _context.Users
-                .Where(u => u.Roles.Any(r => r.RoleId == roleId)).ToList();
-            var ticketPatients = from pat in users
-                join tic in _context.Tickets on pat.Id equals tic.PatientUserId
-                join dept in _context.DoctorDepartments on tic.DepartmentId equals dept.DepartmentId
-                where tic.TicketStatus == "Open"
-                select pat;
+            var doctorId = User.Identity.GetUserId();
+            var doctDept = (from doctdept in _context.DoctorDepartments
+                where doctdept.DoctorUserId == doctorId
+                select doctdept.DepartmentId).FirstOrDefault();
+            var ticks = (from t in _context.Tickets
+                         where t.DepartmentId == doctDept
+                         where t.TicketStatus=="Open"
+                         select t.PatientUserId).ToList();
+            var openTicketPatients = (from u in _context.Users
+                where ticks.Contains(u.Id)
+                select u).ToList();
+//            var roleId = _context.Roles.Where(m => m.Name == "Patient").Select(m => m.Id).SingleOrDefault();
+//            var users = _context.Users
+//                .Where(u => u.Roles.Any(r => r.RoleId == roleId)).ToList();
+//
+//            var ticketPatients = from pat in users
+//                join tic in _context.Tickets on pat.Id equals tic.PatientUserId
+//                join dept in _context.DoctorDepartments on tic.DepartmentId equals dept.DepartmentId
+//                where tic.TicketStatus == "Open"
+//                select pat;
             var viewModel = new CreateDiagnosisViewModel
             {
-                Patients = ticketPatients,
+                Patients = openTicketPatients,
                 Diagnosis = new Diagnosis()
                 
             };

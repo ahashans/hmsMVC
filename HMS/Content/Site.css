@@ -35,10 +35,7 @@ textarea {
 /*    color: #321;*/
 }
 footer {
-    background: #EC6F66;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #F3A183, #EC6F66);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #F3A183, #EC6F66); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    padding-top: 5px;
+
 }
 hr {
     border: none;
@@ -55,10 +52,7 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
-    background: #FC354C;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #0ABFBC, #FC354C);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #0ABFBC, #FC354C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+    background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
     color: #333;
 }
 .content {
@@ -75,3 +69,11 @@ body {
 .validation-summary-errors {
     color: red;
 }
+
+
+#owl-demo .item img{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+

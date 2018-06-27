@@ -1,0 +1,40 @@
+/************
+slider
+**************/
+.slider-area{min-height:300px;}
+.slider-active .owl-nav div{
+    background: #01B5E2 none repeat scroll 0 0;
+    color: #ffffff;
+    font-size: 60px;
+    height: 70px;
+    line-height: 60px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    width: 60px;
+}
+.slider-active .owl-nav div:hover{background: #ffffff;color: #000000;}
+.slider-active .owl-nav div.owl-next{
+    left: auto;
+    right: 20px;
+}
+.slider-active .owl-dots{
+    bottom: 15px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    text-align: center;
+}
+.slider-active .owl-dot{
+    background: #01B5E2 none repeat scroll 0 0;
+    border-radius: 50%;
+    display: inline-block;
+    height: 15px;
+    margin: 0 2px;
+    width: 15px;
+}
+.slider-active .owl-dot.active{
+    background: #ffffff none repeat scroll 0 0;
+}
