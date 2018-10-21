@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -88,6 +90,13 @@ namespace HMS.Controllers
             }
         }
 
+        [AllowAnonymous]
+        [HttpPost]
+        public JsonResult CheckEmail(string Email)
+        {
+            var result = UserManager.FindByEmail(Email) == null;
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
@@ -148,7 +157,18 @@ namespace HMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser {FullName = model.FullName,Gender = model.Gender,DateOfBirth = model.DateOfBirth,Address = model.Address,Mobile = model.Mobile, UserName = model.Email, Email = model.Email };
+                string finalPath = "";
+                if (model.ProfilePicture != null)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(model.ProfilePicture.FileName);
+                    string extension = Path.GetExtension(model.ProfilePicture.FileName);
+                    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    finalPath = "~/Images/" + fileName;
+                    fileName = Path.Combine(Server.MapPath("~/Images"), fileName);
+                    model.ProfilePicture.SaveAs(fileName);
+
+                }
+                var user = new ApplicationUser {FullName = model.FullName,Gender = model.Gender,DateOfBirth = model.DateOfBirth,Address = model.Address,Mobile = model.Mobile, UserName = model.Email, Email = model.Email, ProfileImagePath = finalPath};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

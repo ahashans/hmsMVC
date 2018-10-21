@@ -1,42 +1,92 @@
-﻿<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-left" href="~/Home/Index">
-                <img alt="Brand" src="~/Content/Images/logo.jpg" height="60" width="60">
-            </a>
-            @Html.ActionLink("XYZ Hospital", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" ,@style="margin-left:10px;"})
-            
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                @{
-                    if (User.IsInRole("Admin"))
-                    {
-                        @RenderPage("_AdminNav.cshtml")
-                    }
-                    if (User.IsInRole("Patient"))
-                    {
-                        @RenderPage("_PatientNav.cshtml")
-                    }
-                    if (User.IsInRole("Receptionist"))
-                    {
-                        @RenderPage("_ReceptionistNav.cshtml")
-                    }
-                    if (User.IsInRole("Doctor"))
-                    {
-                        @RenderPage("_DoctorNav.cshtml")
-                    }
-                }
-                
-
-            </ul>
-            
-            @Html.Partial("_LoginPartial")
+﻿<!--Header Section Start-->
+<header class="main-header" id="header">
+    <div class="container clearfix header-upper-section">
+        <a href="~/" class="header-logo">
+            <figure>
+                <img src="~/assets/images/logo.png" alt="logo-image" />
+            </figure> <span class="txt-wraper"> <strong>XYZ Hospital</strong> <span>We care.</span> </span>
+        </a>
+        @* <div class="header-contact-details"> *@
+        @*     <span class="call-details"> <span class="tel-details">call us</span> <a href="tel:85655564555" class="tel">8565 5564 555</a> </span> *@
+        @*     <span class="email-details"> <span class="mail-details">email us</span> <a href="mailto:info@megahealth.com" class="mail">info@megahealth.com</a> </span> *@
+        @* </div> *@
+    </div>
+    <div class="nav-section">
+        <div class="container">
+            <div class="row">
+                <nav class="navbar navbar-default">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class="drop-down-parent">
+                                <a href="~/" class="">home <i class="fa fa-angle-down fa-2x" aria-hidden="true"></i><i class="fa fa-angle-up fa-2x" aria-hidden="true"></i> </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("About","Home")">about us</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Departments","Home")">departments</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Doctors","Home")">doctors </a>
+                            </li>
+                            @* <li> *@
+                            @*     <a href="">services</a> *@
+                            @* </li> *@
+                            @* <li> *@
+                            @*     <a href="">gallery</a> *@
+                            @* </li> *@
+                            <li>
+                                <a href="@Url.Action("Blogs","Home")">blog</a>
+                            </li>
+                            @* <li class="drop-down-parent"> *@
+                            @*     <a href="javascript:void(0)">blog <i class="fa fa-angle-down fa-2x" aria-hidden="true"></i><i class="fa fa-angle-up fa-2x" aria-hidden="true"></i> </a> *@
+                            @*     <ul class="drop-down"> *@
+                            @*         <li> *@
+                            @*             <a href="blog.html">blog page</a> *@
+                            @*         </li> *@
+                            @*         <li> *@
+                            @*             <a href="blog-details.html">blog details page</a> *@
+                            @*         </li> *@
+                            @*     </ul> *@
+                            @* </li> *@
+                            <li>
+                                <a href="@Url.Action("Contact","Home")">contact us</a>
+                            </li>
+                            @* <li class="drop-down-parent"> *@
+                            @*     <a href="javascript:void(0)">Pages <i class="fa fa-angle-down fa-2x" aria-hidden="true"></i><i class="fa fa-angle-up fa-2x" aria-hidden="true"></i> </a> *@
+                            @*     <ul class="drop-down"> *@
+                            @*         <li> *@
+                            @*             <a href="book-appointment.html">book appointment</a> *@
+                            @*         </li> *@
+                            @*         <li> *@
+                            @*             <a href="careers.html">careers</a> *@
+                            @*         </li> *@
+                            @*         <li> *@
+                            @*             <a href="faq.html">faq</a> *@
+                            @*         </li> *@
+                            @*         <li> *@
+                            @*             <a href="testimonials.html">testimonials</a> *@
+                            @*         </li> *@
+                            @*         <li> *@
+                            @*             <a href="404.html">404</a> *@
+                            @*         </li> *@
+                            @*     </ul> *@
+                            @* </li> *@
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </nav>
+                <span class="quick-link"> <span class="quick-link-content">My Account</span> <a href="@Url.Action("Index","Manage")" class="dot-links"> <span class="spans"> </span> <span class="spans"> </span><span class="spans"> </span> <span class="spans"> </span> <span class="spans"> </span><span class="spans"> </span> <span class="spans"> </span> <span class="spans"> </span> <span class="spans"> </span> </a> </span>
+            </div>
         </div>
     </div>
-</div>
+</header>

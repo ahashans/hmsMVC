@@ -28,11 +28,17 @@ namespace HMS.Models
         [Display(Name = "Mobile Number")]
         [StringLength(11)]
         public string Mobile { get; set; }
+
+        [ScaffoldColumn(false)]
+        [Display(Name = "Profile Image")]
+        public string  ProfileImagePath { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
+            userIdentity.AddClaim(new Claim("FullName", this.FullName));
+            userIdentity.AddClaim(new Claim("ProfileImagePath", this.ProfileImagePath));
             return userIdentity;
         }
     }    

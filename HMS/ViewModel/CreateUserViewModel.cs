@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
+using System.Web.ModelBinding;
+using System.Web.Mvc;
 using HMS.Models;
 
 namespace HMS.ViewModel
@@ -27,9 +30,9 @@ namespace HMS.ViewModel
         public string Mobile { get; set; }
         [Required]
         [EmailAddress]
+        [Remote("CheckEmail", "Admin", HttpMethod = "POST", ErrorMessage = "An account with the given email already exists. Please enter a different email")]
         [Display(Name = "Email")]
         public string Email { get; set; }
-
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
@@ -38,13 +41,18 @@ namespace HMS.ViewModel
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         [Required(ErrorMessage = "Role is Required!")]
         public string Role { get; set; }
         [Display(Name = "Department")]
         public int DepartmentId { get; set; }
+
+        [Display(Name = "Profile Picture")]
+        [Required(ErrorMessage = "Please provide a profile Picture for the stuff!")]
+        public HttpPostedFileBase ProfilePicture { get; set; }
+
         public IEnumerable<Department> Departments { get; set; }
     }
 }

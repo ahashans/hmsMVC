@@ -1,10 +1,15 @@
-﻿<li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="Doctor/Index">Doctor<span class="caret"></span></a>
-    <ul class="dropdown-menu">
-        <li>@Html.ActionLink("Home", "Index", "Doctor")</li>
-        <li>@Html.ActionLink("Diagnose Patient", "CreateDiagnosis", "Doctor")</li>
-        <li>@Html.ActionLink("View Patient Diagnosis", "ViewDiagnosis", "Doctor")</li>
-
+﻿<li class="header">Doctor Menu</li>
+<li class="active"><a href="@Url.Action("Index","Doctor")"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+@* <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li> *@
+<li class="treeview">
+    <a href="#">
+        <i class="fa fa-link"></i> <span>Patient Management</span>
+        <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+        </span>
+    </a>
+    <ul class="treeview-menu">
+        <li><a href="@Url.Action("CreateDiagnosis","Doctor")">Diagnose Patient</a></li>
+        <li><a href="@Url.Action("ViewDiagnosis","Doctor")">View Patient Diagnosis</a></li>
     </ul>
 </li>
-

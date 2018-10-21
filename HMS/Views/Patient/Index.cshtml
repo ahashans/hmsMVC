@@ -1,7 +1,55 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Patient Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    //Layout = null;
 }
+@section css
+{
+    <!-- fullCalendar -->
+    <link rel="stylesheet" href="~/admin-lte/fullcalendar/dist/fullcalendar.min.css">
+    <link rel="stylesheet" href="~/admin-lte/fullcalendar/dist/fullcalendar.print.min.css" media="print">
+}
+    
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h2 class="box-title">All Appointments</h2>
+            </div>
+            <div class="box-body no-padding">
+                <!-- THE CALENDAR -->
+                
+                <div id="calendar"></div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /. box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-2"></div>
+</div>
+@section scripts
+{
+    <!-- fullCalendar -->
+    <script src="~/admin-lte/moment/moment.min.js"></script>
+    <script src="~/admin-lte/fullcalendar/dist/fullcalendar.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
 
-<h2>Index</h2>
+            // page is now ready, initialize the calendar...
+
+            $('#calendar').fullCalendar({
+                // put your options and callbacks here
+                
+                events: {
+                    url: "@Url.Action("GetEvents","Patient")"
+                }        
+
+            });
+            
+        });
+    </script>
+}
 

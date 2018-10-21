@@ -1,87 +1,282 @@
-﻿@model HMS.Models.IndexViewModel
+﻿@using HMS.Models
+@model HMS.Models.IndexViewModel
 @{
     ViewBag.Title = "Manage";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>@ViewBag.Title.</h2>
-
-<p class="text-success">@ViewBag.StatusMessage</p>
-<div>
-    <h4>Change your account settings</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>Password:</dt>
-        <dd>
-            [
-            @if (Model.HasPassword)
-            {
-                @Html.ActionLink("Change your password", "ChangePassword")
-            }
-            else
-            {
-                @Html.ActionLink("Create", "SetPassword")
-            }
-            ]
-        </dd>
+@* <h2>@ViewBag.Title.</h2> *@
+@* *@
+@* <p class="text-success">@ViewBag.StatusMessage</p> *@
+@* <div> *@
+@*     <h4>Change your account settings</h4> *@
+@*     <hr /> *@
+@*     <dl class="dl-horizontal"> *@
+@*         <dt>Password:</dt> *@
+@*         <dd> *@
+@*             [ *@
+@*             @if (Model.HasPassword) *@
+@*             { *@
+@*                 @Html.ActionLink("Change your password", "ChangePassword") *@
+@*             } *@
+@*             else *@
+@*             { *@
+@*                 @Html.ActionLink("Create", "SetPassword") *@
+@*             } *@
+@*             ] *@
+@*         </dd> *@
 @*        <dt>External Logins:</dt>*@
 @*        <dd>*@
 @*            @Model.Logins.Count [*@
 @*            @Html.ActionLink("Manage", "ManageLogins") ]*@
 @*        </dd>*@
-        @*
-            Phone Numbers can used as a second factor of verification in a two-factor authentication system.
-             
-             See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                for details on setting up this ASP.NET application to support two-factor authentication using SMS.
-             
-             Uncomment the following block after you have set up two-factor authentication
-        *@
-        @*  
-            <dt>Phone Number:</dt>
-            <dd>
-                @(Model.PhoneNumber ?? "None")
-                @if (Model.PhoneNumber != null)
-                {
-                    <br />
-                    <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
-                    using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>[<input type="submit" value="Remove" class="btn-link" />]</text>
-                    }
-                }
-                else
-                {
-                    <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
-                }
-            </dd>
-        *@
+@*
+    Phone Numbers can used as a second factor of verification in a two-factor authentication system.
+
+     See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+        for details on setting up this ASP.NET application to support two-factor authentication using SMS.
+
+     Uncomment the following block after you have set up two-factor authentication
+*@
+@*
+    <dt>Phone Number:</dt>
+    <dd>
+        @(Model.PhoneNumber ?? "None")
+        @if (Model.PhoneNumber != null)
+        {
+            <br />
+            <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
+            using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <text>[<input type="submit" value="Remove" class="btn-link" />]</text>
+            }
+        }
+        else
+        {
+            <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
+        }
+    </dd>
+*@
 @*        <dt>Two-Factor Authentication:</dt>*@
 @*        <dd>*@
 @*            <p>*@
 @*                There are no two-factor authentication providers configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>*@
 @*                for details on setting up this ASP.NET application to support two-factor authentication.*@
 @*            </p>*@
-            @*@if (Model.TwoFactor)
-                {
-                    using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>Enabled
-                        <input type="submit" value="Disable" class="btn btn-link" />
-                        </text>
-                    }
-                }
-                else
-                {
-                    using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>Disabled
-                        <input type="submit" value="Enable" class="btn btn-link" />
-                        </text>
-                    }
-                }*@
+@*@if (Model.TwoFactor)
+    {
+        using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <text>Enabled
+                <input type="submit" value="Disable" class="btn btn-link" />
+            </text>
+        }
+    }
+    else
+    {
+        using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <text>Disabled
+            <input type="submit" value="Enable" class="btn btn-link" />
+            </text>
+        }
+    }*@
 @*        </dd>*@
-    </dl>
-</div>
+@*     </dl> *@
+@* </div> *@
+
+        <div class="row">
+            <div class="col-md-3">
+
+                <!-- Profile Image -->
+                <div class="box box-primary">
+                    <div class="box-body box-profile">
+                        <img class="profile-user-img img-responsive img-circle" src="@Url.Content(User.GetProfileImagePath())" alt="User profile picture">
+
+                        <h3 class="profile-username text-center">@User.GetFullName()</h3>
+
+                        @* <p class="text-muted text-center">Software Engineer</p> *@
+
+                        @* <ul class="list-group list-group-unbordered"> *@
+                        @*     <li class="list-group-item"> *@
+                        @*         <b>Followers</b> <a class="pull-right">1,322</a> *@
+                        @*     </li> *@
+                        @*     <li class="list-group-item"> *@
+                        @*         <b>Following</b> <a class="pull-right">543</a> *@
+                        @*     </li> *@
+                        @*     <li class="list-group-item"> *@
+                        @*         <b>Friends</b> <a class="pull-right">13,287</a> *@
+                        @*     </li> *@
+                        @* </ul> *@
+                        @* *@
+                        @* <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> *@
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+                <!-- About Me Box -->
+                @if (!User.IsInRole("Patient"))
+                {
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">About Me</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
+
+                            <p class="text-muted">
+                                B.S. in Computer Science from the University of Tennessee at Knoxville
+                            </p>
+
+                            <hr>
+
+                            <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+
+                            <p class="text-muted">Malibu, California</p>
+
+                            <hr>
+
+                            @* <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong> *@
+                            @* *@
+                            @* <p> *@
+                            @*     <span class="label label-danger">UI Design</span> *@
+                            @*     <span class="label label-success">Coding</span> *@
+                            @*     <span class="label label-info">Javascript</span> *@
+                            @*     <span class="label label-warning">PHP</span> *@
+                            @*     <span class="label label-primary">Node.js</span> *@
+                            @* </p> *@
+                            @* *@
+                            @* <hr> *@
+
+                            @* <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong> *@
+                            @* *@
+                            @* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p> *@
+                        </div>
+                        
+                        <!-- /.box-body -->
+                    </div>
+                }
+                
+                    
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-9">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#profileInfo" data-toggle="tab">Change Profile Informations</a></li>
+                        @* <li><a href="#timeline" data-toggle="tab">Timeline</a></li> *@
+                        @* <li><a href="#settings" data-toggle="tab">Change Password</a></li> *@
+                    </ul>
+                    <div class="tab-content">
+
+
+                        <div class="active tab-pane" id="profileInfo">
+                            <form class="form-horizontal" action="@Url.Action("UpdateProfileInfo")" method="post" enctype="multipart/form-data">
+                                @Html.AntiForgeryToken()
+                                <div class="form-group">
+                                    <label for="name" class="col-sm-2 control-label">Full Name</label>
+
+                                    <div class="col-sm-10">
+                                        <div class="input-group date">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                            </div>
+                                            @Html.TextBoxFor(m => m.FullName, new {@class = "form-control", id = "name"})
+                                            @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="datepicker" class="col-sm-2 control-label">Date Of Birth</label>
+                                    <div class="col-sm-10">
+
+                                        <div class="input-group date">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            @Html.TextBoxFor(m => m.DateOfBirth, "{0:yyyy-MM-dd}", new {@class = "form-control pull-right", type = "text", id = "datepicker"})
+                                            @Html.ValidationMessageFor(m => m.DateOfBirth, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mobile" class="col-sm-2 control-label">Mobile Number</label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-phone"></i>
+                                            </div>
+                                            @Html.TextBoxFor(m => m.Mobile, new {@class = "form-control pull-right", type = "text", data_inputmask_regex = "/(01)[5-9][0-9]{8}/", id = "mobile"})
+                                            @Html.ValidationMessageFor(m => m.Mobile, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Address" class="col-sm-2 control-label">Address</label>
+                                    <div class="col-sm-10">
+                                        @* <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea> *@
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-map-marker"></i>
+                                            </div>
+                                            @Html.TextAreaFor(m => m.Address, new {@class = "form-control", id = "Address"})
+                                            @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="profileImage" class="col-sm-2 control-label">Profile Picture</label>
+
+                                    <div class="col-sm-10">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-image"></i>
+                                            </div>
+                                            @Html.TextBoxFor(m => m.ProfilePicture, new {@class = "form-control", type = "file", id = "profileImage"})
+                                            @Html.ValidationMessageFor(m => m.ProfilePicture, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-danger">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /.tab-pane -->
+                    </div>
+                    <!-- /.tab-content -->
+                </div>
+                <!-- /.nav-tabs-custom -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <!-- InputMask -->
+    <script src="~/admin-lte/moment/min/moment.min.js"></script>
+    <script src="~/admin-lte/input-mask/jquery.inputmask.js"></script>
+    <script src="~/admin-lte/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="~/admin-lte/input-mask/jquery.inputmask.extensions.js"></script>
+    <!-- bootstrap datepicker -->
+    <script src="~/admin-lte/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript">
+        //Date picker
+        $('#datepicker').datepicker({
+            defaultDate: "@Model.DateOfBirth",
+            format: "yyyy-mm-dd",
+            autoclose: true
+        });
+        $("#mobile").inputmask();
+    </script>
+
+}

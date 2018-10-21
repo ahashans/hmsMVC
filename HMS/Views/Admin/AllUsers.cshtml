@@ -1,0 +1,67 @@
+﻿@model IEnumerable<HMS.ViewModel.UserListViewModel>
+
+@{
+    ViewBag.Title = "All Users";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@section css
+{
+    <!-- DataTables -->
+    <link rel="stylesheet" href="~/admin-lte/datatables.net-bs/css/dataTables.bootstrap.min.css">
+}
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">All Registered Users</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <table id="userTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>User Full Name</th>
+                    <th>Gender</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Profile Picture</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.FullName</td>
+                    <td>@user.Gender</td>
+                    <td>@user.Email</td>
+                    <td>@user.Role</td>
+                    <td> <img src="@Url.Content(user.ProfilePicture)" width="250" height="250"/> </td>
+                </tr>
+            }
+            
+            </tbody>
+            <tfoot>
+                <tr>
+
+                    <th>User Full Name</th>
+                    <th>Gender</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Profile Picture</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <!-- /.box-body -->
+</div>
+<!-- /.box -->
+
+@section scripts
+{
+    <!-- DataTables -->
+    <script src="~/admin-lte/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/admin-lte/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#userTable').DataTable();
+        })
+    </script>
+}

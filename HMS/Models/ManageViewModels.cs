@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
@@ -12,6 +14,16 @@ namespace HMS.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+        [Required(ErrorMessage = "Mobile Number is required!")]
+        public string Mobile { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "Date of Birth is required!")]
+        public DateTime? DateOfBirth { get; set; }
+        [Required(ErrorMessage = "Full Name is required!")]
+        public string  FullName { get; set; }
+        [Required(ErrorMessage = "Address is required!")]
+        public string Address { get; set; }        
+        public HttpPostedFileBase ProfilePicture { get; set; }    
     }
 
     public class ManageLoginsViewModel

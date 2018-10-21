@@ -1,0 +1,165 @@
+﻿@* @model TModel *@
+
+@{
+    ViewBag.Title = "Blog Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--Banner Section Starts-->
+<div class="banner-section banner-image">
+
+</div>
+<!--Banner Section Ends-->
+<div class="content padd-top padd-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>blog details</h2>
+            </div>
+            <div class="col-xs-12 col-sm-9">
+                <div class="section">
+                    <article class="article clearfix">
+                        <figure>
+                            <img class="img-responsive" src="~/assets/images/blog-detail-1.jpg" alt="" />
+                        </figure>
+                        <div class="article-text article-text-details">
+                            <h4><a href="blog.html">Blog Heading here</a></h4>
+                            <ul class="about-blog">
+                                <li class="date">
+                                    <a href="#">04. 4. 2016</a>
+                                </li>
+                                <li class="share">
+                                    <a href="#">Share</a>
+                                    <ul class="social-share">
+                                        <li>
+                                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <p>
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+                                remaining essentially unchanged.
+                            </p>
+                            <div class="blog-quote clearfix">
+                                <span class="quote-fig"></span>
+                                <blockquote class="testimonial-quotes">
+                                    <span class="quote-top">“</span>
+                                    <p>
+                                        Printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. <span class="quote-bottom">“</span>
+                                    </p>
+
+                                </blockquote>
+                            </div>
+                            <p>
+                                Typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                            </p>
+                            <div class="btn-grp">
+                                <a class="btn" href="#">next</a>
+                                <a class="btn grey-btn" href="#">previous</a>
+                            </div>
+                            <span class="article-icon purple"> <a href="#"> <i class="fa fa-picture-o" aria-hidden="true"></i> </a> </span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-3">
+                <aside class="aside">
+                    <form>
+                        <input type="text" placeholder="Search" />
+                        <button type="submit">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                    </form>
+                    <div class="category">
+                        <h3>category</h3>
+                        <ul>
+                            <li>
+                                <a href="#">Morbi molestie lectus</a>
+                            </li>
+                            <li>
+                                <a href="#">Integer auctor tortor et faucibus</a>
+                            </li>
+                            <li>
+                                <a href="#">Sed vel felis luctusfermentum</a>
+                            </li>
+                            <li>
+                                <a href="#">Consectetur consequat.</a>
+                            </li>
+                            <li>
+                                <a href="#">Ignissim velit eu nunc iaculis</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="recent-post">
+                        <h3>recent post</h3>
+                        <div class="recent-blog">
+                            <img class="img-responsive" src="~/assets/images/blog-img-aside.jpg" alt="" />
+                            <div class="recent-text">
+                                <h4><a href="blog.html">Blog Heading</a></h4>
+                                <p>
+                                    Lorem Ipsum is simply
+                                    dummy text of the printing
+                                    and typesetting...
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+    <div class="comments-sec">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-9">
+                    <div class="comments-wrap">
+                        <h2>comments</h2>
+                        <div class="user-wrap">
+                            <span><a href="#">User Name</a> </span>
+                            <span><a href="#">Reply</a> </span>
+                        </div>
+                        <p>
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
+                        </p>
+                    </div>
+                </div>
+                <div class="col-xs-11 col-sm-7 col-xs-offset-1">
+                    <div class="sub-comments">
+                        <div class="user-wrap">
+                            <span><a href="#">User Name</a> </span>
+                            <span><a href="#">Reply</a> </span>
+                        </div>
+                        <p>
+                            Printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+                            text ever since the 1500s, when an unknown printer took a galley of type and scrambled
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="leave-comment">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-9">
+                    <h2>leave comment</h2>
+                    <form>
+                        <input class="input-box" type="text" placeholder="NAME" />
+                        <input class="input-box" type="email" placeholder="EMAIL" />
+                        <textarea class="textarea" placeholder="COMMENT"></textarea>
+                        <button type="submit" class="btn">
+                            submit
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

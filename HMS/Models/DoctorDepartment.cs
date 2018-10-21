@@ -18,5 +18,10 @@ namespace HMS.Models
         [ForeignKey("DoctorUserId")]
         public ApplicationUser DoctorUser { get; set; }
 
+        [Display(Name = "Short Introduction")]
+        public string ShortIntro { get; set; }
+        [Display(Name = "Long Introduction")]
+        public string LongIntro { get; set; }
+
     }
 }

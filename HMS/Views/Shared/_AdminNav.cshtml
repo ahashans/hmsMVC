@@ -1,10 +1,42 @@
-﻿<li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="Admin/Index">Admin
-        <span class="caret"></span></a>
-    <ul class="dropdown-menu">
-        <li>@Html.ActionLink("Admin Panel", "Index", "Admin")</li>
-        @* <li>@Html.ActionLink("Create User", "CreateUser", "Admin")</li> *@
-        @* <li>@Html.ActionLink("Create Department", "CreateDepartment", "Admin")</li> *@
-        @* <li>@Html.ActionLink("All Departments", "AllDepartments", "Admin")</li> *@
+﻿<li class="header">Admin Menu</li>
+<li class="active"><a href="@Url.Action("Index","Admin")"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+@* <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li> *@
+<li class="treeview">
+    <a href="#">
+        <i class="fa fa-user"></i> <span>User Management</span>
+        <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+        </span>
+    </a>
+    <ul class="treeview-menu">
+        <li><a href="@Url.Action("CreateUser","Admin")">Create User</a></li>
+        <li><a href="@Url.Action("AllUsers","Admin")">All Users</a></li>
     </ul>
+</li>
+<li class="treeview">
+    <a href="#">
+        <i class="fa fa-database"></i> <span>Department Management</span>
+        <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+        </span>
+    </a>
+    <ul class="treeview-menu">
+        <li><a href="@Url.Action("CreateDepartment","Admin")">Create Department</a></li>
+        <li><a href="@Url.Action("AllDepartments","Admin")">View Departments</a></li>
+    </ul>
+</li>
+<li>
+    <a href="@Url.Action("Blog","Admin")">
+        <i class="fa fa-sticky-note"></i> <span>Blog Management</span>
+    </a>
+</li>
+<li>
+    <a href="@Url.Action("Events","Admin")">
+        <i class="fa fa-calendar"></i> <span>Event Management</span>
+    </a>
+</li>
+<li>
+    <a href="@Url.Action("Testimonials","Admin")">
+        <i class="fa fa-sticky-note-o"></i> <span>Testimonial Management</span>
+    </a>
 </li>

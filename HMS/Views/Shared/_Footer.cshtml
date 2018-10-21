@@ -1,0 +1,127 @@
+﻿<footer class="footer">
+    <div class="footer-top padd-top padd-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="footer-padd">
+                        <h6>Quick Links</h6>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <ul>
+                                <li>
+                                    <a href="~/">Home</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("About","Home")">about us</a>
+                                </li>                                
+                                <li>
+                                    <a href="@Url.Action("","Home")">doctors</a>
+                                </li>
+                                @* <li> *@
+                                @*     <a href="testimonials.html">testimonial</a> *@
+                                @* </li> *@
+                                <li>
+                                    <a href="@Url.Action("AppointmentBooking","Home")">book appointment</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6">
+                            <ul>
+                                <li>
+                                    <a href="@Url.Action("Departments","Home")">departments</a>
+                                </li>
+                                @* <li> *@
+                                @*     <a href="faq.html">faq</a> *@
+                                @* </li> *@
+                                @* <li> *@
+                                @*     <a href="gallery.html">news</a> *@
+                                @* </li> *@
+                                <li>
+                                    <a href="@Url.Action("Blogs","Home")">blog</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Contact","Home")">contact us</a>
+                                </li>
+                                @* <li> *@
+                                @*     <a href="careers.html">careers</a> *@
+                                @* </li> *@
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="footer-padd">
+                        <h6>Opening Hours</h6>
+                    </div>
+                    <ul class="opening-msg common-padd-bottom">
+                        <li>
+                            <span class="opening-hours days">monday - friday</span>
+                            <span class="opening-hours">8.00 – 17.00</span>
+                        </li>
+                        <li>
+                            <span class="opening-hours days">saturday</span>
+                            <span class="opening-hours">9.30 – 17.30</span>
+                        </li>
+                        <li>
+                            <span class="opening-hours days">sunday</span>
+                            <span class="opening-hours">9.30 – 15.00</span>
+                        </li>
+                    </ul>
+                    <ul class="social">
+                        <li>
+                            <a href="https://www.facebook.com" class="social-links">facebook</a>
+                        </li>
+                        <li>
+                            <a href="https://www.twitter.com" class="social-links">twitter</a>
+                        </li>
+                        @* <li> *@
+                        @*     <a href="" class="social-links">linkedin</a>r *@
+                        @* </li> *@
+                    </ul>
+                </div>
+                <div class="col-sm-3 col-sm-offset-1">
+                    <div class="footer-padd">
+                        <h6>contact us</h6>
+                    </div>
+                    <address class="footer-address">
+                        <div class="address-section">
+                            <span class="address-title">address</span><span class="address-details">
+                                XYZ Hospital
+                                Dhaka
+                                Bangladesh
+                            </span>
+                        </div>
+                        <div class="address-section">
+                            <span class="address-title">email</span>
+                            <a href="mailto:ahashans@gmail.com" class="address-details">info@xyzhospital.com</a>
+                        </div>
+                        <div class="address-section">
+                            <span class="address-title">phone</span>
+                            <a href="tel:01300111222" class="address-details">013 00 111222</a>
+                        </div>
+                    </address>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="form-section">
+                    <div class="newsletter">
+                        <h6>newsletter</h6>
+                        <span class="footer-bottom-content">Subscribe your newsletter</span>
+                    </div>
+                    <div class="footer-form">
+                        <form action="" method="post">
+                            <input type="text" name="search" class="input-section" />
+                            <input type="submit" value="subscribe" class="submit-button" />
+                        </form>
+                    </div>
+                </div>
+                <span class="footer-bottom-content">@DateTime.Today.Year © all rights reserved XYZHospital</span>
+            </div>
+        </div>
+    </div>
+</footer>

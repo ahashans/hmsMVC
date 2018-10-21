@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -15,11 +16,12 @@ namespace HMS.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        private ApplicationDbContext _context;
         public ManageController()
         {
+            _context = new ApplicationDbContext();
         }
-
+        
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
@@ -64,17 +66,48 @@ namespace HMS.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
+            var user = _context.Users.SingleOrDefault(u => u.Id == userId);
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                FullName = user.FullName,
+                DateOfBirth = user.DateOfBirth,
+                Address = user.Address,
+                Mobile = user.Mobile,
+
             };
             return View(model);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdateProfileInfo(IndexViewModel model)
+        {
+            var userId = User.Identity.GetUserId();
+            var user = _context.Users.SingleOrDefault(u => u.Id == userId);
+            string finalPath = user.ProfileImagePath;
+            if (model.ProfilePicture != null)
+            {
+                string fileName = Path.GetFileNameWithoutExtension(model.ProfilePicture.FileName);
+                string extension = Path.GetExtension(model.ProfilePicture.FileName);
+                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                finalPath = "~/Images/" + fileName;
+                fileName = Path.Combine(Server.MapPath("~/Images"), fileName);
+                model.ProfilePicture.SaveAs(fileName);
 
+            }
+
+            user.FullName = model.FullName;
+            user.DateOfBirth = model.DateOfBirth;
+            user.Mobile = model.Mobile;
+            user.Address = model.Address;
+            user.ProfileImagePath = finalPath;
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
         //
         // POST: /Manage/RemoveLogin
         [HttpPost]

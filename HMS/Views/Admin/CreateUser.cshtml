@@ -1,6 +1,7 @@
 ﻿@model HMS.ViewModel.CreateUserViewModel
 @{
     ViewBag.Title = "Create User";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <script type="text/javascript">
@@ -17,99 +18,143 @@
         }
     }
 </script>
-<h2>CreateUser</h2>
-@using (Html.BeginForm("CreateUser", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.FullName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Gender, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(m => m.Gender, new SelectList(new List<Object>
-            {
 
-                new {value = "", text = "Select a Gender"},
-                new {value = "Male", text = "Male"},
-                new {value = "Female", text = "Female"},
-                new {value = "Others", text = "Others"}
-            }, "value", "text"), new { @class = "form-control" })
+        <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">User Entry Form</h3>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.DateOfBirth, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.DateOfBirth, new { type = "date", @class = "form-control", max=DateTime.Today.Date.ToString("yyyy-MM-dd") })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Address, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextAreaFor(m => m.Address, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Mobile, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group"> 
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model=>model.Role,new SelectList( new List<Object>
-            {
-                new{value = "Doctor", text = "Doctor"},
-                new{value = "Receptionist", text = "Receptionist"}
-            }, "value", "text"), "Select a Role",new{@class="form-control", onchange = "javascript:getRole(this.value);" })
-            @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger"})
-        </div>
-    </div>
-    <div id="departmentView" class="form-group">
-        @Html.LabelFor(model => model.DepartmentId, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.DepartmentId, new SelectList(Model.Departments, "DepartmentId", "Name"), "Select a Department", new {id="ddlDepartment", @class = "form-control", onchange = "javascript:;" })
-            @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                @using (Html.BeginForm("CreateUser", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype= "multipart/form-data" }))
+                {
+            <div class="box-body">
+
+                @Html.AntiForgeryToken()
+                <h4>Create a new account.</h4>
+                <hr />
+                @* @Html.ValidationSummary("", new { @class = "text-danger" }) *@
+                <div class="form-group">
+                    @Html.LabelFor(m => m.FullName, new { @class = "control-label" })
+
+                    @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m=>m.FullName, "", new {@class="text-danger"})
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Gender, new { @class = "control-label" })
+                    @Html.DropDownListFor(m => m.Gender, new SelectList(new List<Object>
+    {
+
+        new {value = "", text = "Select a Gender"},
+        new {value = "Male", text = "Male"},
+        new {value = "Female", text = "Female"},
+        new {value = "Others", text = "Others"}
+    }, "value", "text"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.DateOfBirth, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.DateOfBirth, new { type = "date", @class = "form-control", max = DateTime.Today.Date.ToString("yyyy-MM-dd") })
+                    @Html.ValidationMessageFor(m => m.DateOfBirth, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Address, new { @class = "control-label" })
+                    @Html.TextAreaFor(m => m.Address, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Mobile, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Mobile, "", new { @class = "text-danger" })                    
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label" })
+
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label" })
+
+                    @Html.DropDownListFor(model => model.Role, new SelectList(new List<Object>
+                {
+                    new {value = "Doctor", text = "Doctor"},
+                    new {value = "Receptionist", text = "Receptionist"}
+                }, "value", "text"), "Select a Role", new { @class = "form-control", onchange = "javascript:getRole(this.value);" })
+                    @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
+
+                </div>
+                <div id="departmentView" class="form-group">
+                    @Html.LabelFor(model => model.DepartmentId, htmlAttributes: new { @class = "control-label" })
+
+                    @Html.DropDownListFor(model => model.DepartmentId, new SelectList(Model.Departments, "DepartmentId", "Name"), "Select a Department", new { id = "ddlDepartment", @class = "form-control", onchange = "javascript:;" })
+                    @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
+
+                </div>
+                <div id="departmentView" class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.ProfilePicture, htmlAttributes: new { @class = "control-label" })
+
+                            @Html.TextBoxFor(model=>model.ProfilePicture, new{@class="form-control", accept="image/*", type="file", id="photo", onchange= "readURL(this)" })
+
+                        </div>
+                        <div class="col-md-6">
+                            <img src="" alt="No Profile Picture selected!" id="profileImageView" width="250" height="250"/>
+                        </div>
+                    </div>  
+                    @Html.ValidationMessageFor(model => model.ProfilePicture, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+                    <div class="box-footer">
+
+                        <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                        <button type="reset" class="btn btn-warning pull-left">Reset</button>
+                    </div>
 }
+            </div>
+        </div>
+
+        </div>
+        <!-- /.box -->    
+@* <h2>CreateUser</h2> *@
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             $("#departmentView").slideUp("fast");
-        });
+        });        
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#profileImageView').attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
     </script>
 }
 

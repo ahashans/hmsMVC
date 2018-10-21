@@ -1,0 +1,243 @@
+﻿@model HMS.ViewModel.AppointmentViewModel
+
+@{
+    ViewBag.Title = "Book an Appointment";
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+@section css
+{
+<link rel="stylesheet" href="~/Content/bootstrap-datetimepicker.css" />
+}
+<div class="banner-section banner-image">
+
+</div>
+<div class="content">
+    <div class="container padd-top padd-bottom">
+        <div class="text-center">
+            <h2>Book your appointment</h2>
+        </div>
+        <form action="@Url.Action("StoreAppointment")" method="POST" class="about-form info-form">
+            @* <div class="info-heading-icon"> *@
+            @*     <h4>Personal Information</h4> *@
+            @* </div> *@
+            @* <ul class="row info"> *@
+            @*     <li class="col-sm-4"> *@
+            @*         <span class="form-title">First Name</span> *@
+            @*         <input type="text" class="form-part" /> *@
+            @*     </li> *@
+            @*     <li class="col-sm-4"> *@
+            @*         <span class="form-title">last Name</span> *@
+            @*         <input type="text" class="form-part" /> *@
+            @*     </li> *@
+            @*     <li class="col-sm-4"> *@
+            @*         <span class="form-title">age</span> *@
+            @*         <input type="text" class="form-part" /> *@
+            @*     </li> *@
+            @*     <li class="col-sm-4"> *@
+            @*         <span class="form-title">sex</span> *@
+            @*         <span class="info-holder"> *@
+            @*             <select class="form-part"> *@
+            @*                 <option>-select sex-</option> *@
+            @*                 <option>-select sex-</option> *@
+            @*                 <option>-select sex-</option> *@
+            @*             </select><span class="info-arrow"> </span> *@
+            @*         </span> *@
+            @*     </li> *@
+            @*     <li class="col-sm-8"> *@
+            @*         <span class="form-title">address</span> *@
+            @*         <input type="text" class="form-part" /> *@
+            @*     </li> *@
+            @*     <li class="col-sm-4"> *@
+            @*         <span class="form-title">country</span> *@
+            @*         <span class="info-holder"> *@
+            @*             <select class="form-part"> *@
+            @*                 <option>-select country-</option> *@
+            @*                 <option>-select country-</option> *@
+            @*                 <option>-select country-</option> *@
+            @*             </select><span class="info-arrow"> </span> *@
+            @*         </span> *@
+            @*     </li> *@
+            @*     <li class="col-sm-4"> *@
+            @*         <span class="form-title">state</span> *@
+            @*         <span class="info-holder"> *@
+            @*             <select class="form-part"> *@
+            @*                 <option>-select state-</option> *@
+            @*                 <option>-select state-</option> *@
+            @*                 <option>-select state-</option> *@
+            @*             </select><span class="info-arrow"> </span> *@
+            @*         </span> *@
+            @*     </li> *@
+            @*     <li class="col-sm-4"> *@
+            @*         <span class="form-title">city</span> *@
+            @*         <span class="info-holder"> *@
+            @*             <select class="form-part"> *@
+            @*                 <option>-select city-</option> *@
+            @*                 <option>-select city-</option> *@
+            @*                 <option>-select city-</option> *@
+            @*             </select> <span class="info-arrow"> </span> *@
+            @*         </span> *@
+            @*     </li> *@
+            @*     <li class="col-sm-4"> *@
+            @*         <span class="form-title">phone/mobile</span> *@
+            @*         <input type="tel" class="form-part" /> *@
+            @*     </li> *@
+            @*     <li class="col-sm-4"> *@
+            @*         <span class="form-title">email address</span> *@
+            @*         <input type="email" class="form-part" /> *@
+            @*     </li> *@
+            @* </ul> *@
+            <div class="info-heading-icon two">
+                <h4>Appointment Schedule</h4>
+            </div>
+            <ul class="row info">
+                <li class="col-sm-4">
+                    <span class="form-title">department</span>
+                    <span class="info-holder">
+                        <select id="ddlDepartments" name="DepartmentId" class="form-part" onchange="javascript: getDoctors(this.value);" @(ViewBag.SearchBy!=null ? "Disabled":"")>
+                            @if (ViewBag.SearchBy == null)
+                            {
+                                <option value="0" >Select a department</option>
+                            }
+                            @foreach (var department in Model.Departments)
+                            {
+                                <option value="@department.DepartmentId">@department.Name</option>
+                            }
+                        </select>
+
+                        <span class="info-arrow"> </span>
+                    </span>
+                </li>
+                <li class="col-sm-4">
+                    <span class="form-title">preferred doctor</span>
+                    <span class="info-holder">
+                        @* <select class="form-part" n> *@
+                        @*     <option>-select doctor-</option> *@
+                        @*     <option>-select doctor-</option> *@
+                        @*     <option>-select doctor-</option> *@
+                        @* </select>  *@
+                        @{
+                            var attributes = new Dictionary<string, object> {{"class", "form-part"}};
+
+                            if(ViewBag.SearchBy=="Doctor")
+                            {
+                                attributes.Add("disabled", "disabled");
+                            }
+                        }
+                        @* @Html.DropDownListFor(m => m.DoctorDepartmentId, Enumerable.Empty<SelectListItem>(), "Select a Department First!", attributes) *@
+                        <select class="form-part" name="DoctorDepartmentId" @(ViewBag.SearchBy=="Doctor" ? "Disabled":"")>
+                            @if (ViewBag.SearchBy == null)
+                            {
+                            <option value="">Select a Department First!</option>
+                            }
+                            else if(ViewBag.SearchBy == "Department")
+                            {
+                                <option value="">Select a Doctor</option>
+
+                            }
+                            @foreach (var doctorDepartment in Model.DoctorDepartments)
+                            {
+                            <option value="@doctorDepartment.Id">@doctorDepartment.DoctorUser.FullName</option>
+                            }
+                        </select>
+                        @Html.ValidationMessageFor(m => m.DoctorDepartmentId, "", new { @class = "text-danger" })
+                        <span class="info-arrow"> </span>
+                    </span>
+                </li>
+                <li class="col-sm-4">
+
+                    <span class="form-title">Appointment Date</span>
+                    <div class='input-group date' id='datetimepicker1'>
+                        @* <input type='text' class="form-part" /> *@
+                        @Html.TextBoxFor(m => m.AppointmentDate, new { @class = "form-control", type = "text", value = DateTime.Now })
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.AppointmentDate, "", new { @class = "text-danger" })
+                    @* <input type="text" class="form-part"/> *@
+                </li>
+            </ul>
+            <div class="info-heading-icon three">
+                <h4>Medical Problem</h4>
+            </div>
+            <ul class="row">
+                <li class="col-sm-6">
+                    <span class="form-title">Your Problem</span>
+                    @* <textarea class="form-part info-message"></textarea> *@
+                    @Html.TextAreaFor(m=>m.Problem, new{@class= "form-part info-message" })
+                    @Html.ValidationMessageFor(m=>m.Problem, "", new{@class="text-danger"})
+                </li>
+                <li class="col-sm-6">
+                    <span class="form-title">Remark</span>
+                    @* <textarea class="form-part info-message"></textarea> *@
+                    @Html.TextAreaFor(m => m.Remarks, new { @class = "form-part info-message" })
+                </li>
+            </ul>
+            <div class="text-left">
+                <input type="submit" class="btn btn-submit" value="get an appointment" />
+            </div>
+        </form>
+    </div>
+</div>
+@section scripts
+{
+    <script type="text/javascript" src="~/Scripts/moment.js"></script>
+    <script type="text/javascript" src="~/Scripts/transition.js"></script>
+    <script type="text/javascript" src="~/Scripts/collapse.js"></script>    
+    <script type="text/javascript" src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker1').datetimepicker({
+                useCurrent: true,
+                minDate: new Date(),
+                format: 'DD-MM-YYYY hh:mm A',
+                showTodayButton: true,
+                sideBySide: true,
+                showClose: true,
+                showClear: true
+            });
+        });
+        function getDoctors(departmentId) {
+            if (departmentId >= 0) {
+                var url = "/Home/GetDoctors/";
+                $.ajax({
+                    url: url,
+                    data: { departmentid: departmentId },
+                    cache: false,
+                    type: "POST",
+                    success: function (data) {
+                        if (departmentId > 0) {
+                            if (data.length > 0) {
+                                $('#ddlDoctors').html("");
+                                $('#ddlDoctors').append("<option value=''>Select a doctor</option>");
+                                for (var i = 0; i < data.length; i++) {
+                                    $('#ddlDoctors').append("<option value='" +
+                                        data[i].Id
+                                        + "'>" +
+                                        data[i].DoctorUser.FullName
+                                        + "</option>"
+                                    );
+                                }
+
+                            }
+                            else {
+                                $('#ddlDoctors').html("<option value=''>No doctor under this department</option>");
+                            }
+                        }
+                        else {
+                            $('#ddlDoctors').html("");
+                            $('#ddlDoctors').append("<option value=''>Select a Department First!</option>");
+//                            
+                        }
+                    },
+                    error: function (reponse) {
+                        alert("error : " + reponse);
+                    }
+                });
+            } else {
+                //$('#d')
+            }
+        }
+    </script>
+}

@@ -1,29 +1,73 @@
 ﻿@model HMS.ViewModel.AdminIndexViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Admin Home</h2>
-<div class="">
-    <div class="jumbotron">
-        <h3>All Users</h3>
-        <table class="table table-bordered table-responsive table-hover table-striped">
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-            </tr>
-            @foreach (var user in Model.UserList)
-            {
-                <tr>
-                    <td>@user.UserName</td>
-                    <td>@user.Email</td>
-                    <td>@user.Role</td>
-                </tr>
-            }
-        </table>
-    </div>
+
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-aqua">
+                    <div class="inner">
+                        <h3>@Model.DiagnosisCount</h3>
+
+                        <p>Diagnosis</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-ios-medical"></i>
+                    </div>
+                    @* <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> *@
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h3>@Model.DoctorCount</h3>
+
+                        <p>Doctors</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person-add"></i>
+                    </div>
+                    @* <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> *@
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-yellow">
+                    <div class="inner">
+                        <h3>@Model.StaffCount</h3>
+
+                        <p>Staffs</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person-add"></i>
+                    </div>
+                    @* <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> *@
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-red">
+                    <div class="inner">
+                        <h3>@Model.PatientCount</h3>
+
+                        <p>Patients</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person-add"></i>
+                    </div>
+                    @* <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> *@
+                </div>
+            </div>
+            <!-- ./col -->
+        </div>
+        <!-- /.row -->
+
     
-
-</div>
-

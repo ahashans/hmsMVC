@@ -64,5 +64,30 @@ namespace HMS.Controllers
             ViewBag.patientId = User.Identity.GetUserId();
             return View();
         }
+        //Get Events of Patient
+        public JsonResult GetEvents()
+        {
+            //var data = "";
+            var patientId = User.Identity.GetUserId();
+            var appointments = _context.Appointments.Include(a=> a.DoctorDepartment.Department).Include(a => a.DoctorDepartment.DoctorUser).Where(a => a.PatientId == patientId).ToList();
+            var events = new
+            {
+                events = appointments.Select(dailyEvent => new
+                {
+                    title = "Appointment in "+dailyEvent.DoctorDepartment.Department.Name+" Department",
+                    start = dailyEvent.AppointmentDate,
+                    end = dailyEvent.AppointmentDate.AddMinutes(5),
+                    allDay = 0
+                })
+            };
+            return Json(appointments.Select(dailyEvent => new
+            {
+                title = "Appointment in " + dailyEvent.DoctorDepartment.Department.Name + " Department",
+                start = dailyEvent.AppointmentDate.ToString("O"),
+                end = dailyEvent.AppointmentDate.AddMinutes(5).ToString("O"),
+                allDay = 0
+            }), JsonRequestBehavior.AllowGet);
+        }
     }
+    
 }

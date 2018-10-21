@@ -1,0 +1,80 @@
+﻿@model IEnumerable<HMS.Models.Blog>
+
+@{
+    ViewBag.Title = "Blog Posts";
+    ViewBag.Subtitle = "Blog Post Management";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@section css
+{
+    <!-- DataTables -->
+    <link rel="stylesheet" href="~/admin-lte/datatables.net-bs/css/dataTables.bootstrap.min.css">
+}
+<div class="box box-info">
+    <div class="box-header">
+        <h3 class="box-title">All @ViewBag.Title</h3>
+        <div class="pull-right">
+            <a href="@Url.Action("CreateBlog")" class="btn btn-app"> <i class="fa fa-plus"></i> Create New Blog Post</a>
+        </div>
+    </div>
+    <div class="alert alert-dismissable">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <table id="userTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Post Title</th>
+                    <th>Post Author</th>
+                    <th>Created at </th>
+                    <th>Feature Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var post in Model)
+                {
+                    <tr>
+                        <td>@post.Title</td>
+                        <td>@post.Author.FullName</td>
+                        <td>@post.CreatedAt</td>
+                        <td>
+                            <img src="@(string.IsNullOrEmpty(post.FeatureImagePath)?"":Url.Content(post.FeatureImagePath))" style="max-width:200px; max-height: 200px; object-fit: contain;" />
+                        </td>
+                        <td>
+                            <a href="@Url.Action("EditBlog","Admin",new{id=post.Id})" class="btn btn-app"><i class="fa fa-edit"></i></a>
+                            <a href="@Url.Action("DeleteBlog","Admin",new{id=post.Id})" class="btn btn-app"><i class="fa fa-remove"></i></a>
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Post Title</th>
+                    <th>Post Author</th>
+                    <th>Created at </th>
+                    <th>Feature Image</th>
+                    <th>Actions</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <!-- /.box-body -->
+</div>
+<!-- /.box -->
+
+@section scripts
+{
+    <!-- DataTables -->
+    <script src="~/admin-lte/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/admin-lte/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#userTable').DataTable();
+        })
+    </script>
+}

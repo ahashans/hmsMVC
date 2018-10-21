@@ -1,0 +1,128 @@
+﻿@model HMS.ViewModel.DoctorListViewModel
+@{
+    ViewBag.Title = "Doctors";
+}
+
+<div class="banner-section banner-image">
+    <div class="container gallery">
+        <div class="book-appointment-section appoint-link">
+            <a href="@Url.Action("AppointmentBooking","Home")" class="inner-sec"> <span class="anchor-icon"> <i class="icon-calendar"></i> </span> book your appointment </a>
+        </div>
+    </div>
+</div>
+<div class="content padd-top padd-bottom">
+    <div class="container">
+        <div class="text-left col-manage-section common-padd-bottom">
+            <h2>our doctors</h2>
+            <span class="col-manage"> <span class="dots-three"> <span class="dots"> </span> <span class="dots"> </span> <span class="dots"> </span> </span> <span class="dots-two active-col"> <span class="dots"> </span> <span class="dots"> </span> <span class="dots"> </span> <span class="dots"> </span> <span class="dots"> </span> <span class="dots"> </span> <span class="dots"> </span> <span class="dots"> </span> <span class="dots"> </span> </span> </span>
+        </div>
+
+        <div class="select-section">
+            <div class="select-heading">
+                <h4>Search Docters <span class="sub-heading">by department</span></h4>
+            </div>
+            <form method="post" action="" class="category-form">
+                <span class="select-holder">
+                    <select id="ddlDoctors" name="DoctorId" class="" onchange="javascript: getDoctors(this.value);">
+                        <option value="0">Select a department</option>
+                        @foreach (var department  in Model.Departments)
+                        {
+                            <option value="@department.DepartmentId">@department.Name</option> 
+                        }
+                    </select>
+                    <span class="select-arrow"></span>
+                </span>
+                @* <input type="submit" value="search now" class="select-search" /> *@
+            </form>
+        </div>
+        <div class="row" id="doctorContainer">
+            @foreach (var doctor in Model.Doctors)
+            {
+                <div class="col-sm-4 zoom col-section">
+                    <figure class="grid-fig">
+                        <img src="@Url.Content(doctor.DoctorUser.ProfileImagePath)" alt="" class="img-responsive" width="263" height="295"/>
+                    </figure>
+                    <article class="grid-details">
+                        <h4>Dr. @doctor.DoctorUser.FullName</h4>
+                        <span class="dr-des">@doctor.Department.Name Specialist</span>
+                        <p>@doctor.ShortIntro</p>
+                        <a href="@Url.Action("DoctorDetails","Home", new{id=doctor.Id})" class="btn">view profile</a>
+                    </article>
+                </div>
+            }
+            
+
+        </div>
+        <div class="text-center pagi-nav">
+            <a href="#" class="pagination-number active-section">1</a>
+            <a href="#" class="pagination-number">2</a>
+            <a href="#" class="pagination-number">3</a>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        function getDoctors(departmentId)
+        {
+            if (departmentId>=0) {
+                var url = "/Home/GetDoctors/";
+                $.ajax({
+                    url: url,
+                    data: { departmentid: departmentId },
+                    cache: false,
+                    type: "POST",
+                    success: function (data) {                        
+                        if (departmentId > 0) {
+                            if (data.length>0) {
+                                $('#doctorContainer').html("");
+                                for (var i = 0; i < data.length; i++) {
+                                    $('#doctorContainer').append("" +
+                                        "<div class='col-sm-4 zoom col-section'>" +
+                                        "<figure class='grid-fig'>" +
+                                        "<img src = '../" + data[i].DoctorUser.ProfileImagePath.substring(2) + "' alt='' class='img-responsive' runat='server'/>" +
+                                        "</figure>" +
+                                        "<article class='grid-details'>" +
+                                        "<h4> Dr." + data[i].DoctorUser.FullName + "</h4>" +
+                                        "<span class='dr-des'>" + data[i].Department.Name + "</span>" +
+                                        "<p>" + data[i].ShortIntro + "</p>" +
+                                        "<a href = 'doctor-details.html' class='btn'>view profile</a>" +
+                                        "</article>" +
+                                        "</div>"
+                                    );
+                                }
+                            
+                            }
+                            else {
+                                $('#doctorContainer').html("<p class='alert alert-warning'>No Doctors in this department</p>");
+                            }
+                        }
+                        else {
+                            $('#doctorContainer').html("<p class='alert alert-warning'>Showing all doctors from all departments</p>");
+                            for (var i = 0; i < data.length; i++) {
+                                $('#doctorContainer').append("" +
+                                    "<div class='col-sm-4 zoom col-section'>" +
+                                    "<figure class='grid-fig'>" +
+                                    "<img src = '../" + data[i].DoctorUser.ProfileImagePath.substring(2) + "' alt='' class='img-responsive' runat='server'/>" +
+                                    "</figure>" +
+                                    "<article class='grid-details'>" +
+                                    "<h4> Dr." + data[i].DoctorUser.FullName + "</h4>" +
+                                    "<span class='dr-des'>" + data[i].Department.Name + "</span>" +
+                                    "<p>" + data[i].ShortIntro + "</p>" +
+                                    "<a href = '@Url.Action("DoctorDetails","Home")?id="+data[i].ID+"' class='btn'>view profile</a>" +
+                                    "</article>" +
+                                    "</div>"
+                                );
+                            }
+                        }
+                    },
+                    error: function(reponse) {
+                        alert("error : " + reponse);
+                    }
+                });
+            } else {
+                //$('#d')
+            }
+        }
+    </script>
+}

@@ -43,6 +43,7 @@ namespace HMS.Models
         public string RequiredTests { get; set; }
 
         [Display(Name = "Diagnosis Time")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:YYYY MMM DD}")]
         public DateTime DiagnosisTimeStamp { get; set; }
     }
 }

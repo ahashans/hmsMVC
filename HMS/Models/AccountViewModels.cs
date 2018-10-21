@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
+using System.Web.Mvc;
 
 namespace HMS.Models
 {
@@ -84,6 +86,7 @@ namespace HMS.Models
         public string Mobile { get; set; }
         [Required]
         [EmailAddress]
+        [Remote("CheckEmail", "Account", HttpMethod = "POST", ErrorMessage = "An account with the given email already exists. Please enter a different email")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
@@ -95,8 +98,10 @@ namespace HMS.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public HttpPostedFileBase ProfilePicture { get; set; }
     }
 
     public class ResetPasswordViewModel
@@ -114,7 +119,7 @@ namespace HMS.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }

@@ -1,0 +1,108 @@
+﻿@model HMS.ViewModel.EventCreateViewModel
+
+@{
+    ViewBag.Title = "Probable Event Form";
+    ViewBag.Title = "Probable Event Create Form";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section css{
+    <!-- bootstrap datepicker -->
+    <link rel="stylesheet" href="~/admin-lte/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+}
+<div class="row">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-8">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">@ViewBag.Title</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form" action="@Url.Action("StoreEvent","Admin")" method="post" enctype="multipart/form-data">
+                <div class="box-body">
+                    <div class="form-group">
+                        <label for="title">Event Title</label>
+                        @* <input type="text" class="form-control" id="blogId" placeholder="Enter email"> *@
+                        @Html.TextBoxFor(b => b.ProbableEvent.Title, new { id = "title", @class = "form-control", placeholder = "Enter a blog post title" })
+                        @Html.ValidationMessageFor(b => b.ProbableEvent.Title, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="eventDescription" class="">Event Short Description</label>
+                        @* <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"> *@
+                        @Html.TextAreaFor(b => b.ProbableEvent.ShortDescription, new { id = "eventDescription", rows = "10", @cols = "80", @class = "form-control" })
+                        @Html.ValidationMessageFor(b => b.ProbableEvent.ShortDescription, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="form-group">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="FeatureImage">File input</label>
+                                @Html.TextBoxFor(b => b.FeatureImage, new { @class = "form-control", onchange = "readURL(this)", type = "file", accept = "image/*", id = "FeatureImage", required = "false" })
+                                <p class="help-block">Only one image file allowed</p>
+                                @Html.ValidationMessageFor(b => b.FeatureImage, "", new { @class = "text-danger" })
+
+                            </div>
+                            <div class="col-md-6">
+                                <br />
+                                <img src="" alt="No Feature Image added" id="featureImageView" style="max-height: 200px; max-width: 200px; object-fit: contain;" />
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Event Date</label>
+                        @Html.TextBoxFor(e => e.ProbableEvent.EventDate, new { id = "datepicker", @class = "form-control", type = "text", placeholder = "Select the event date", @readonly="true" })
+                        @Html.ValidationMessageFor(e => e.ProbableEvent.EventDate, "", new { @class = "text-danger" })
+                    </div>
+                    @* <div class="checkbox"> *@
+                    @*     <label> *@
+                    @*         <input type="checkbox"> Check me out *@
+                    @*     </label> *@
+                    @* </div> *@
+                </div>
+                <!-- /.box-body -->
+
+                <div class="box-footer">
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(m => m.ProbableEvent.Id)
+                    @Html.HiddenFor(m => m.ProbableEvent.FeatureImagePath)
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.box -->
+
+    </div>
+    <div class="col-md-2">
+
+    </div>
+</div>
+@section scripts
+{
+    <!-- bootstrap datepicker -->
+    <script src="~/admin-lte/moment/min/moment.min.js"></script>
+    <script src="~/admin-lte/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        //Date picker
+        $('#datepicker').datepicker({
+            autoclose: true
+        })
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#featureImageView').attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+}

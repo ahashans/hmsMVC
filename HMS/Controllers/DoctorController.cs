@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
 using System.Web.Mvc;
 using HMS.Models;
 using HMS.ViewModel;
@@ -140,6 +141,30 @@ namespace HMS.Controllers
             var ctx = _context.Tickets.ToList();
             
             return View("Index");
+        }
+        //Get Events of Patient
+        public JsonResult GetEvents()
+        {
+            //var data = "";
+            var doctorId = User.Identity.GetUserId();
+            var appointments = _context.Appointments.Include(a => a.DoctorDepartment.Department).Include(a => a.DoctorDepartment.DoctorUser).Where(a => a.DoctorDepartment.DoctorUserId == doctorId).ToList();
+            var events = new
+            {
+                events = appointments.Select(dailyEvent => new
+                {
+                    title = "Appointment in " + dailyEvent.DoctorDepartment.Department.Name + " Department",
+                    start = dailyEvent.AppointmentDate,
+                    end = dailyEvent.AppointmentDate.AddMinutes(5),
+                    allDay = 0
+                })
+            };
+            return Json(appointments.Select(dailyEvent => new
+            {
+                title = "Appointment in " + dailyEvent.DoctorDepartment.Department.Name + " Department",
+                start = dailyEvent.AppointmentDate.ToString("O"),
+                end = dailyEvent.AppointmentDate.AddMinutes(5).ToString("O"),
+                allDay = 0
+            }), JsonRequestBehavior.AllowGet);
         }
     }
 }

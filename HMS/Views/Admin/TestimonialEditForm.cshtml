@@ -1,0 +1,101 @@
+﻿@model HMS.ViewModel.TestimonialEditFormViewModel
+
+@{
+    ViewBag.Title = "Testimonial Form";
+    ViewBag.SubTitle = "Testimonial Edit Form";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section css{
+
+}
+<div class="row">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-8">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">@ViewBag.Title</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form" action="@Url.Action("UpdateTestimonial","Admin")" method="post" enctype="multipart/form-data">
+                <div class="box-body">
+                    <div class="form-group">
+                        <label for="title">Testimonial User Name </label>
+                        @* <input type="text" class="form-control" id="blogId" placeholder="Enter email"> *@
+                        @Html.TextBoxFor(b => b.Testimonial.Name, new { id = "title", @class = "form-control", placeholder = "Enter the testimonial user name" })
+                        @Html.ValidationMessageFor(b => b.Testimonial.Name, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Testimonial User Designation</label>
+                        @* <input type="text" class="form-control" id="blogId" placeholder="Enter email"> *@
+                        @Html.TextBoxFor(b => b.Testimonial.Designation, new { id = "title", @class = "form-control", placeholder = "Enter the testimonial user designation" })
+                        @Html.ValidationMessageFor(b => b.Testimonial.Designation, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="eventDescription" class="">Testimonial User Message</label>
+                        @* <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"> *@
+                        @Html.TextAreaFor(b => b.Testimonial.Message, new { id = "eventDescription", rows = "10", @cols = "80", @class = "form-control" })
+                        @Html.ValidationMessageFor(b => b.Testimonial.Message, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="form-group">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="FeatureImage">Profile Picture Input</label>
+                                @Html.TextBoxFor(b => b.ProfilePicture, new { @class = "form-control", onchange = "readURL(this)", type = "file", accept = "image/*", id = "FeatureImage"})
+                                <p class="help-block">Only one image file allowed</p>
+                                @Html.ValidationMessageFor(b => b.ProfilePicture, "", new { @class = "text-danger" })
+
+                            </div>
+                            <div class="col-md-6">
+                                <br />
+                                <img src="@(string.IsNullOrEmpty(Model.Testimonial.ProfileImagePath)?"":Url.Content(Model.Testimonial.ProfileImagePath))" alt="No Feature Image added" id="featureImageView" style="max-height: 200px; max-width: 200px; object-fit: contain;" />
+
+                            </div>
+                        </div>
+                    </div>                    
+                    @* <div class="checkbox"> *@
+                    @*     <label> *@
+                    @*         <input type="checkbox"> Check me out *@
+                    @*     </label> *@
+                    @* </div> *@
+                </div>
+                <!-- /.box-body -->
+
+                <div class="box-footer">
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(m => m.Testimonial.Id)
+                    @Html.HiddenFor(m => m.Testimonial.ProfileImagePath)
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.box -->
+
+    </div>
+    <div class="col-md-2">
+
+    </div>
+</div>
+@section scripts
+{    
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>        
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#featureImageView').attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+}

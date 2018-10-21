@@ -1,0 +1,46 @@
+﻿@model HMS.Models.Blog
+
+    @{
+        ViewBag.Title = "Blog Details";
+    }
+    <!--Banner Section Starts-->
+    <div class="banner-section banner-image">
+
+    </div>
+    <!--Banner Section Ends-->
+    <div class="content padd-top padd-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2>blog details</h2>
+                    <br /><br />
+                </div>
+                <div class="col-xs-12 col-sm-9">
+                    <div class="section">
+                        <article class="article clearfix">
+                            <figure>
+                                <img class="img-responsive" src="@(string.IsNullOrEmpty(Model.FeatureImagePath)?"":Url.Content(Model.FeatureImagePath))" alt="" />
+                            </figure>
+                            <div class="article-text article-text-details">
+                                <h4><a href="">@Model.Title</a></h4>
+                                <ul class="about-blog">
+                                    <li class="date">
+                                        <span>@Model.CreatedAt.ToString("d")</span>
+                                    </li>                                    
+                                </ul>
+                                @Html.Raw(Model.Content)
+                               
+                                
+                                <div class="btn-grp">
+                                    <a class="btn" href="#">next</a>
+                                    <a class="btn grey-btn" href="#">previous</a>
+                                </div>
+                                <span class="article-icon purple"> <a href="#"> <i class="fa fa-picture-o" aria-hidden="true"></i> </a> </span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>

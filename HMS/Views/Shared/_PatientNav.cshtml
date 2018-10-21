@@ -1,8 +1,15 @@
-﻿<li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="Patient/Index">Patient<span class="caret"></span></a>
-    <ul class="dropdown-menu">
-        <li>@Html.ActionLink("Home", "Index", "Patient")</li>
-        <li>@Html.ActionLink("View All Diagnosis", "ViewAllDiagnosis", "Patient")</li>
-        <li>@Html.ActionLink("View All Tickets", "ViewAllTickets", "Patient")</li>
+﻿<li class="header">Patient Menu</li>
+<li class="active"><a href="@Url.Action("Index","Patient")"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+@* <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li> *@
+<li class="treeview">
+    <a href="#">
+        <i class="fa fa-link"></i> <span>Ticket and Diagnosis Reports</span>
+        <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+        </span>
+    </a>
+    <ul class="treeview-menu">
+        <li><a href="@Url.Action("ViewAllDiagnosis", "Patient")">View All Diagnosis</a></li>
+        <li><a href="@Url.Action("ViewAllTickets", "Patient")">View Tickets</a></li>
     </ul>
 </li>

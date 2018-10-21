@@ -1,12 +1,15 @@
-﻿<li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="Receptionist/Index">
-        Receptionist
-        <span class="caret"></span>
+﻿<li class="header">Receptionist Menu</li>
+<li class="active"><a href="@Url.Action("Index","Receptionist")"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+@* <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li> *@
+<li class="treeview">
+    <a href="#">
+        <i class="fa fa-link"></i> <span>Ticket Management</span>
+        <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+        </span>
     </a>
-    <ul class="dropdown-menu">
-        <li>@Html.ActionLink("Receptionist Home", "Index", "Receptionist")</li>
-        <li>@Html.ActionLink("Create Ticket", "CreateTicket", "Receptionist")</li>
-        <li>@Html.ActionLink("Show Tickets", "DisplayTicket", "Receptionist")</li>
+    <ul class="treeview-menu">
+        <li><a href="@Url.Action("CreateTicket","Receptionist")">Create Ticket</a></li>
+        <li><a href="@Url.Action("DisplayTicket","Receptionist")">View Tickets</a></li>
     </ul>
 </li>
-

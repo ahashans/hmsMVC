@@ -1,0 +1,70 @@
+﻿@using HMS.Models
+@model IEnumerable<HMS.Models.Department>
+@{
+    ViewBag.Title = "Departments";
+}
+<div class="banner-section banner-image">
+    <div class="container gallery">
+        <div class="book-appointment-section appoint-link">
+            <a href="@Url.Action("AppointmentBooking","Home")" class="inner-sec"> <span class="anchor-icon"> <i class="icon-calendar"></i> </span> book your appointment </a>
+        </div>
+    </div>
+</div>
+
+<section class="departments ptb ptb-sm">
+    <div class="container">
+        <div class="sec-title">
+            <h2>Our Departments</h2>
+        </div>
+        <div class="search-sec">
+            <form>
+                <ul>
+                    <li>
+                        <input class="search-input" type="text" placeholder="Search Department">
+                        <button class="fa fa-search"></button>
+                    </li>
+                </ul>
+            </form>
+        </div>
+        <br />
+        <br />
+        @foreach (var chunk in Model.Chunk(2))
+        {
+            <div class="row mb-25">
+                @foreach (var department in chunk)
+                {
+                    <div class="col-sm-6">
+                        <div class="department-blocks">
+                            <span class="@department.IconCode"> </span>
+                            <div class="department-txt">
+                                <div class="sub-heading">
+                                    <h4>@department.Name</h4>
+                                </div>
+                                <p>
+                                    @department.ShortDescription
+                                </p>
+                                <a class="btn" href="@Url.Action("AppointmentBookingByDepartment","Home", new {id=department.DepartmentId})">book Appointment</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+</section>
+
+<div class="more-department-section padd-top padd-bottom">
+    <div class="container">
+        <div class="text-center">
+            <h3>More Department</h3>
+        </div>
+        <p>
+            if you are looking anymore department/Treatnment
+            Free feel to contact us
+        </p>
+        <div class="text-center set-margin-top">
+            <a href="@Url.Action("Contact")" class="btn">contact us</a>
+        </div>
+    </div>
+</div>
