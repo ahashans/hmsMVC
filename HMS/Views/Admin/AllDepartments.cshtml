@@ -1,26 +1,80 @@
 ﻿@model IEnumerable<HMS.Models.Department>
+
 @{
-    ViewBag.Title = "AllDepartments";
+    ViewBag.Title = "Departments";
+    ViewBag.SubTitle = "Department Management";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
-<h2>All Departments</h2>
-<div class="">
-    <div class="jumbotron">
-        <h3>All Departments</h3>
-        <table class="table table-bordered table-responsive table-hover table-striped">
-            <tr>
-                <th>Name</th>
-                <th>Fee</th>
-            </tr>
-            @foreach (var dept in Model)
-            {
+@section css
+{
+    <!-- DataTables -->
+    <link rel="stylesheet" href="~/admin-lte/datatables.net-bs/css/dataTables.bootstrap.min.css">
+}
+<div class="box box-info">
+    <div class="box-header">
+        <h3 class="box-title">All @ViewBag.Title</h3>
+        <div class="pull-right">
+            <a href="@Url.Action("CreateDepartment")" class="btn btn-app"> <i class="fa fa-plus"></i> Create New Department</a>
+        </div>
+    </div>
+    <div class="alert alert-dismissable">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <table id="userTable" class="table table-bordered table-striped">
+            <thead>
                 <tr>
-                    <td>@dept.Name</td>
-                    <td>@dept.Fee</td>
+                    <th>Name</th>
+                    <th>Fee</th>
+                    <th>Short Description</th>
+                    <th>Feature Image</th>
+                    <th>Actions</th>
                 </tr>
-            }
+            </thead>
+            <tbody>
+                @foreach (var department in Model)
+                {
+                    <tr>
+                        <td>@department.Name</td>
+                        <td>@department.Fee</td>
+                        <td>@department.ShortDescription</td>
+                        <td>
+                            <span class="@department.IconCode"></span>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("EditDepartment","Admin",new{id=department.DepartmentId})" class="btn btn-app"><i class="fa fa-edit"></i></a>
+                            <a href="@Url.Action("DeleteDepartment","Admin",new{id=department.DepartmentId})" class="btn btn-app"><i class="fa fa-remove"></i></a>
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Name</th>
+                    <th>Fee</th>
+                    <th>Short Description</th>
+                    <th>Feature Image</th>
+                    <th>Actions</th>
+                </tr>
+            </tfoot>
         </table>
     </div>
+    <!-- /.box-body -->
 </div>
+<!-- /.box -->
 
+@section scripts
+{
+    <!-- DataTables -->
+    <script src="~/admin-lte/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/admin-lte/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#userTable').DataTable();
+        })
+    </script>
+}

@@ -41,7 +41,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="FeatureImage">File input</label>
-                                @Html.TextBoxFor(b => b.FeatureImage, new { @class = "form-control", onchange = "readURL(this)", type = "file", accept = "image/*", id = "FeatureImage", required = "false" })
+                                @Html.TextBoxFor(b => b.FeatureImage, new { @class = "form-control", onchange = "readURL(this)", type = "file", accept = "image/*", id = "FeatureImage"})
                                 <p class="help-block">Only one image file allowed</p>
                                 @Html.ValidationMessageFor(b => b.FeatureImage, "", new { @class = "text-danger" })
 

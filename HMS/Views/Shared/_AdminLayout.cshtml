@@ -201,7 +201,32 @@ desired effect
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="~/"><i class="fa fa-dashboard"></i> Home</a></li>
-                    <li><a href="#">Admin Panel</a></li>
+                    <li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                        <a href="@Url.Action("Index", "Admin")">
+                            Admin Panel
+                        </a>
+                                }
+                                @if (User.IsInRole("Doctor"))
+                                {
+                                    <a href="@Url.Action("Index", "Doctor")">
+                                        Doctor Panel
+                                    </a>
+                                }
+                                @if (User.IsInRole("Receptionist"))
+                                {
+                                    <a href="@Url.Action("Index", "Receptionist")">
+                                        Receptionist Panel
+                                    </a>
+                                }
+                                @if (User.IsInRole("Patient"))
+                                {
+                                    <a href="@Url.Action("Index", "Patient")">
+                                        Patient Panel
+                                    </a>
+                                } 
+                        </li>
                     <li class="active">@ViewBag.Title</li>
                 </ol>
             </section>

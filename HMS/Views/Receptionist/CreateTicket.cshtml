@@ -1,10 +1,11 @@
 ﻿@model HMS.ViewModel.TicketFormViewModel
 @{
-    ViewBag.Title = "CreateTicket";
+    ViewBag.Title = "Ticket Form";
+    ViewBag.SubTitle = "Create New Ticket";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 <script type="text/javascript">
-    function getFee(departmentId)
-    {
+    function getFee(departmentId) {
         if (departmentId) {
             var url = "/Receptionist/GetDepartmentFee/";
             $.ajax({
@@ -12,14 +13,14 @@
                 data: { departmentid: departmentId },
                 cache: false,
                 type: "POST",
-                success: function(data) {
+                success: function (data) {
                     if (data.fees) {
                         $("#txtBillAmount").attr("value", data.fees);
                     } else {
                         $("#txtBillAmount").attr("value", "Department Not Found");
                     }
                 },
-                error: function(reponse) {
+                error: function (reponse) {
                     alert("error : " + reponse);
                 }
             });
@@ -41,15 +42,25 @@
         }
     }
 </script>
-<h2>Create Ticket</h2>
+<div class="row">
+<div class="col-md-2">
+
+</div>
+<div class="col-md-8">
+<div class="box box-primary">
+<div class="box-header with-border">
+    <h3 class="box-title">@ViewBag.Title</h3>
+</div>
+<!-- /.box-header -->
+<!-- form start -->
 @if (ViewBag.openTicketExists != null)
 {
     <h2 class="alert-warning">Patient already has a open ticket in this department.</h2>
-    <br/>  
+    <br />
 }
 @using (Html.BeginForm("StoreTicket", "Receptionist", FormMethod.Post))
 {
-    <div class="container">
+    <div class="container-fluid">
         <div class="form-horizontal">
             <div class="form-group">
                 @Html.LabelFor(m => m.Ticket.PatientUserId, htmlAttributes: new { @class = "col-md-2 control-label" })
@@ -95,17 +106,24 @@
                 <div class="col-md-1"></div>
                 <button type="reset" class="btn btn-warning col-md-1">Reset</button>
             </div>
-        </div>        
+        </div>
     </div>
-        }
+}
+        </div>
+        <!-- /.box -->
 
-    
+    </div>
+    <div class="col-md-2">
+
+    </div>
+</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
-        $(document).ready(function() {
-            $("#txtBillAmount").attr("readonly","true");
+        $(document).ready(function () {
+            $("#txtBillAmount").attr("readonly", "true");
             $("#card").slideUp("fast");
         });
     </script>

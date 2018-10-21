@@ -9,48 +9,78 @@
         <h3 class="box-title">Department Form</h3>
         @Html.ActionLink("Back to List", "AllDepartments", "Admin", new { @class = "btn btn-primary pull-right" })
     </div>
-<!-- /.box-header -->
-<!-- form start -->
-<div class="row">
-<div class="col-md-3"></div>
-<div class="col-md-6">
+    <!-- /.box-header -->
+    <!-- form start -->
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
 
-    @using (Html.BeginForm("StoreDepartment", "Admin", FormMethod.Post))
-    {
-        <div class="box-body">
-            @Html.AntiForgeryToken()
+            <form action="@(Model.DepartmentId==0?Url.Action("StoreDepartment", "Admin"):Url.Action("UpdateDepartment", "Admin"))" method="post">
+                <div class="box-body">
+                    @Html.AntiForgeryToken()
 
-            <div class="form-horizontal">
-                <h4>Department</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    <div class="form-horizontal">
+                        <h4>Department Form</h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Fee, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Fee, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Fee, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label for="shortDesc" class="">Event Short Description</label>
+                            @* <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"> *@
+                            @Html.TextAreaFor(d => d.ShortDescription, new { id = "shortDesc", rows = "10", @cols = "80", @class = "form-control" })
+                            @Html.ValidationMessageFor(d => d.ShortDescription, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="form-group">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="logo">File input</label>
+                                    @Html.TextBoxFor(d => d.IconCode, new { @class = "form-control", onchange = "", type = "text", id = "logo", })
+                                    <p class="help-block">Only one image file allowed</p>
+                                    @Html.ValidationMessageFor(d => d.IconCode, "", new { @class = "text-danger" })
+
+                                </div>
+                                <div class="col-md-6">
+                                    <br />
+                                    <span class="" alt="No Department Logo added" id="featureImageView" style="font-size: x-large;"></span>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <div class="box-footer">
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Fee, htmlAttributes: new { @class = "control-label" })
-                    @Html.EditorFor(model => model.Fee, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Fee, "", new { @class = "text-danger" })
-                </div>                
-            </div>
-        </div>
-        <div class="box-footer">
+                    @Html.HiddenFor(d=>d.DepartmentId)
+                    <input type="reset" name="Reset" value="Reset" class="btn btn-warning pull-left" />
+                    <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                </div>
+                </form>
 
 
-            <input type="reset" name="Reset" value="Reset" class="btn btn-warning pull-left" />
-            <button type="submit" class="btn btn-primary pull-right">Submit</button>
-        </div>
-            }
-
-            
         </div>
     </div>
 
 </div>
-<!-- /.box -->    
+<!-- /.box -->
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    
+    <script>
+        $('#logo').on('input', function () {
+            $('#featureImageView').removeClass();
+            $('#featureImageView').attr('class', $(this).val());
+        });            
+    </script>
 }

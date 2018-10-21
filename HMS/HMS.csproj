@@ -346,6 +346,7 @@
     <Compile Include="ViewModel\EventCreateViewModel.cs" />
     <Compile Include="ViewModel\EventEditViewModel.cs" />
     <Compile Include="ViewModel\HomeIndexViewModel.cs" />
+    <Compile Include="ViewModel\ReceptionistIndexViewModel.cs" />
     <Compile Include="ViewModel\TestimonialFormViewModel.cs" />
     <Compile Include="ViewModel\TicketFormViewModel.cs" />
     <Compile Include="ViewModel\TicketUserViewModel.cs" />

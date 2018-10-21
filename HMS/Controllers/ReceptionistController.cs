@@ -25,7 +25,12 @@ namespace HMS.Controllers
         // GET: Receptionist
         public ActionResult Index()
         {
-            return View();
+            var userId = User.Identity.GetUserId();
+            var viewModel = new ReceptionistIndexViewModel
+            {
+                TicketCount = _context.Tickets.Where(t => t.ReceptionistUserId == userId).ToList().Count
+            };
+            return View(viewModel);
         }
         public ActionResult CreateTicket()
         {

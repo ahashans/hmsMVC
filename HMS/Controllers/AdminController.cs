@@ -178,6 +178,47 @@ namespace HMS.Controllers
             
             return View("AllDepartments", "_AdminLayout", departments);
         }
+
+        public ActionResult EditDepartment(int id)
+        {
+            var department = _context.Departments.SingleOrDefault(d => d.DepartmentId == id);
+            return View("CreateDepartment", department);
+        }
+
+        public ActionResult UpdateDepartment(Department department)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("CreateDepartment", department);
+            }
+
+            var departmentInDb = _context.Departments.SingleOrDefault(d => d.DepartmentId == department.DepartmentId);
+            if (departmentInDb != null)
+            {
+                departmentInDb.Name = department.Name;
+                departmentInDb.ShortDescription = department.ShortDescription;
+                departmentInDb.Fee = department.Fee;
+                if (string.IsNullOrEmpty(departmentInDb.IconCode))
+                {
+                    departmentInDb.IconCode = department.IconCode;
+                }
+
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("AllDepartments", "Admin");
+        }
+
+        public ActionResult DeleteDepartment(int id)
+        {
+            var department = _context.Departments.SingleOrDefault(d => d.DepartmentId == id);
+            if (department != null)
+            {
+                _context.Departments.Remove(department);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("AllDepartments", "Admin");
+        }
         public ActionResult AllUsers()
         {
             var usersWithRoles = (from user in _context.Users
